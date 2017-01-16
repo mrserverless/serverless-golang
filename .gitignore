@@ -1,2 +1,5 @@
 .serverless
-handler.zip
+.idea/
+*.so
+*.zip
+out.txt

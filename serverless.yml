@@ -1,11 +1,11 @@
-service: MV-SLS-golang
+service: serverless-golang
 package:
-  artifact: handler.zip
+  artifact: package.zip
 provider:
   name: aws
   runtime: python2.7
-  stage: dev
-  region: ap-southeast-2
+  stage: ${env:ENV}
+  region: ${env:AWS_DEFAULT_REGION}
 functions:
   hello:
-    handler: handler.handle
+    handler: foo.Bar
