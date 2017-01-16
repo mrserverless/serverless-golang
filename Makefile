@@ -1,10 +1,14 @@
 IMAGE_LAMBDA_GO=eawsy/aws-lambda-go-shim
 
 GOPATH ?= $(HOME)/go
-HANDLER ?= foo
+HANDLER ?= handler
 PACKAGE ?= package
 
-all: clean dist aws-deploy
+aws-all: clean dist aws-deploy
+.PHONY: aws-all
+
+sls-all: clean dist sls-deploy
+.PHONY: sls-all
 
 deps:
 	go get -u -d github.com/eawsy/aws-lambda-go-core/...
@@ -12,6 +16,7 @@ deps:
 .PHONY: deps
 
 clean: _clean
+.PHONY: clean
 
 dist:
 	@docker run --rm \
@@ -36,7 +41,7 @@ aws-deploy:
 	  --function-name preview-go \
 	  --zip-file fileb://package.zip \
 	  --runtime python2.7 \
-	  --handler foo.Bar
+	  --handler handler.Handle
 	@echo -ne "done!"\\n
 .PHONY: deploy
 

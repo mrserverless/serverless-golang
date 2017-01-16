@@ -4,19 +4,19 @@ This example uses [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda
 deploy to AWS either directly or via [serverless](https://serverless.com/) framework.
 
 ## Usage
-Prior to running, you should have `go` and `docker` installed. 
+Prior to running, you should have `go` and `docker` installed. Then get all the dependencies:
 
-    # get dependencies
     make deps
 
-    # bundle package.zip and deploy to AWS directly
-    make
+To use `aws lambda` CLI command directly, set a environment variable for `AWS_ACCOUNT_NUMBER` and run:
+
+    make aws-all
     make aws-invoke
     cat out.txt
     
-To leverage `serverless`, the following environment variables are need: `AWS_DEFAULT_REGION` and `ENV`. Then simply run:
+To leverage `serverless`, set environment variables : `AWS_DEFAULT_REGION` and `ENV`. Then run:
 
-    make dist sls-deploy
+    make sls-all
     make sls-invoke
 
 To clean up

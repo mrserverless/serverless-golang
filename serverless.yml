@@ -8,4 +8,4 @@ provider:
   region: ${env:AWS_DEFAULT_REGION}
 functions:
   hello:
-    handler: foo.Bar
+    handler: handler.Handle
