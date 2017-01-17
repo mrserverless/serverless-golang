@@ -1,4 +1,6 @@
 IMAGE_LAMBDA_GO=eawsy/aws-lambda-go-shim
+# we can't use .serverless folder because it gets wiped by sls deploy
+OUTPUT_DIR=bin
 
 # aws-lambda-go-shim env vars
 GOPATH ?= $(HOME)/go
@@ -28,6 +30,14 @@ dist:
 		eawsy/aws-lambda-go-shim make _dist
 .PHONY: dist
 
+# debug shell when things go unexpected
+shell:
+	@docker run --rm -ti \
+		-v "$(GOPATH)":/go -v "$(shell PWD)":/tmp \
+		-e "HANDLER=$(HANDLER)" -e "PACKAGE=$(PACKAGE)" \
+		eawsy/aws-lambda-go-shim bash
+.PHONY: shell
+
 # serverless targets
 deploy:
 	AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} ENV=${ENV} sls deploy
@@ -42,23 +52,18 @@ delete:
 .PHONY: delete
 
 # make targets inside docker container
-_dist: _clean _build _pack _inject
-	@chown $(shell stat -c '%u:%g' .) $(PACKAGE).zip
-	@printf "build, pack, inject, go!\n"
+_dist: _clean _build _pack
+	@chown $(shell stat -c '%u:%g' .) $(OUTPUT_DIR)/$(PACKAGE).zip
+	@printf "build, pack, go!\n"
 
 _clean:
-	@rm -rf $(PACKAGE).zip $(HANDLER).so
+	@rm -rf $(OUTPUT_DIR)
 
 _build:
 	@printf "build...\r"
-	@go build -buildmode=plugin -ldflags='-w -s' -o $(HANDLER).so
-	@chown $(shell stat -c '%u:%g' .) $(HANDLER).so
+	@go build -buildmode=plugin -ldflags='-w -s' -o $(OUTPUT_DIR)/$(HANDLER).so
+	@chown $(shell stat -c '%u:%g' .) $(OUTPUT_DIR)/$(HANDLER).so
 
 _pack:
 	@printf "build, pack\r"
-	@zip -q $(PACKAGE).zip $(HANDLER).so
-
-_inject:
-	@printf "build, pack, inject\r"
-	@cd /; mv /shim $(HANDLER); zip -q -r /tmp/$(PACKAGE).zip $(HANDLER)
-
+	@cd $(OUTPUT_DIR); mv /shim $(HANDLER); zip -q -r $(PACKAGE).zip $(HANDLER).so $(HANDLER)

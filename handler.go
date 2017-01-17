@@ -10,5 +10,7 @@ import (
 )
 
 func Handle(evt json.RawMessage, ctx *runtime.Context) (interface{}, error) {
-	return NewResponse(http.StatusOK, NewBody("Hello Serverless Golang!", "empty input")), nil
+	r := Response{StatusCode: http.StatusOK}
+	r.SetBodyStruct(&Body{Message: "Hello Serverless Golang!", Input: evt})
+	return r, nil
 }

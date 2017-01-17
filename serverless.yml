@@ -1,6 +1,6 @@
 service: serverless-golang
 package:
-  artifact: package.zip
+  artifact: bin/package.zip
 provider:
   name: aws
   runtime: python2.7

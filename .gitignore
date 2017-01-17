@@ -1,5 +1,3 @@
 .serverless
 .idea/
-*.so
-*.zip
-out.txt
+bin/

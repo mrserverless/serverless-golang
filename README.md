@@ -5,12 +5,14 @@ into a `python` runtime using [eawsy/aws-lambda-go-shim](https://github.com/eaws
 `aws-lambda-go-shim` takes care of:
 
 1. build golang binary into `$HANDLER.so`
-2. packages everything into `$PACKAGE.zip`
+2. zip `$HANDLER.so` and python shims into `$PACKAGE.zip`
 
 `serverless` then takes care of:
 
 3. deploy function
 4. invoke function
+
+Works with standard serverless/Lambda invoke or API Gateway HTTP requests.
 
 ## Usage
 Prior to running, you should have `go` and `docker` installed. Then get all the dependencies:

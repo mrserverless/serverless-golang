@@ -1,19 +1,19 @@
 package main
 
-type Body struct {
-	Message string `json:"message"`
-	Input   string `json:"input"`
-}
+import "encoding/json"
 
-func NewBody(m string, e string) *Body {
-	return &Body{Message: m, Input: e}
+type Body struct {
+	Message string		`json:"message"`
+	Input   json.RawMessage	`json:"input"`
 }
 
 type Response struct {
-	StatusCode int   `json:"statusCode"`
-	Body       *Body `json:"body"`
+	StatusCode int		`json:"statusCode"`
+	Body       string	`json:"body"`
 }
 
-func NewResponse(s int, b *Body) *Response {
-	return &Response{StatusCode: s, Body: b}
+// inspired by serverless-java
+func (r *Response) SetBodyStruct(b *Body) {
+	bytes, _ := json.Marshal(b)
+	r.Body = string(bytes)
 }
