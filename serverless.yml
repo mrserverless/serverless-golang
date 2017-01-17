@@ -6,6 +6,7 @@ provider:
   runtime: python2.7
   stage: ${env:ENV}
   region: ${env:AWS_DEFAULT_REGION}
+  profile: ${env:AWS_PROFILE}
 functions:
   hello:
     handler: handler.Handle

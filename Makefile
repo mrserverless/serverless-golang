@@ -1,16 +1,17 @@
 IMAGE_LAMBDA_GO=eawsy/aws-lambda-go-shim
 
+# aws-lambda-go-shim env vars
 GOPATH ?= $(HOME)/go
 HANDLER ?= handler
 PACKAGE ?= package
-AWS_ACCOUNT_NUMBER ?= $(shell aws iam list-users --output text | head -1|  cut -f2 | cut -f5 -d:)
+
+# serverless.yml env vars
 ENV ?= dev
+AWS_DEFAULT_REGION ?= ap-southeast-2
+AWS_PROFILE ?= default
 
-aws-all: clean dist aws-deploy
-.PHONY: aws-all
-
-sls-all: clean dist sls-deploy
-.PHONY: sls-all
+all: clean dist deploy invoke
+.PHONY: all
 
 deps:
 	go get -u -d github.com/eawsy/aws-lambda-go-core/...
@@ -22,52 +23,23 @@ clean: _clean
 
 dist:
 	@docker run --rm \
-		-v "$(GOPATH)":/go -v "$(PWD)":/tmp \
+		-v "$(GOPATH)":/go -v "$(shell PWD)":/tmp \
 		-e "HANDLER=$(HANDLER)" -e "PACKAGE=$(PACKAGE)" \
 		eawsy/aws-lambda-go-shim make _dist
 .PHONY: dist
 
-# debug shell when things go unexpected
-shell:
-	@docker run --rm -ti \
-		-v "$(GOPATH)":/go -v "$(shell PWD)":/tmp \
-		-e "HANDLER=$(HANDLER)" -e "PACKAGE=$(PACKAGE)" \
-		eawsy/aws-lambda-go-shim bash
-.PHONY: shell
-
-# aws cli deploy
-aws-deploy:
-	@printf "deploying lambda...\n"
-	aws lambda create-function \
-	  --role arn:aws:iam::$(AWS_ACCOUNT_NUMBER):role/lambda_basic_execution \
-	  --function-name preview-go \
-	  --zip-file fileb://package.zip \
-	  --runtime python2.7 \
-	  --handler handler.Handle
-	@printf "done!\n"
-.PHONY: deploy
-
-aws-invoke:
-	aws lambda invoke --function-name preview-go out.txt
-
-aws-delete:
-	@printf "deleting lambda...\n"
-	aws lambda delete-function --function-name preview-go
-	@printf "done!\n"
-.PHONY: deploy
-
 # serverless targets
-sls-deploy:
-	ENV=${ENV} sls deploy
-.PHONY: sls-deploy
+deploy:
+	AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} ENV=${ENV} sls deploy
+.PHONY: deploy
 
-sls-invoke:
-	sls invoke -f hello
-.PHONY: sls-invoke
+invoke:
+	AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} ENV=${ENV} sls invoke -f hello
+.PHONY: invoke
 
-sls-delete:
-	sls remove -v
-.PHONY: sls-delete
+delete:
+	AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} ENV=${ENV} sls remove -v
+.PHONY: delete
 
 # make targets inside docker container
 _dist: _clean _build _pack _inject
