@@ -1,4 +1,6 @@
 # Serverless Golang
+
+[<img src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png" align="right" width="100">](http://serverless.com)
 Simple Hello World [serverless](https://serverless.com/) service embedding a `golang` 1.8 function 
 into a `python` runtime using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim).
 
