@@ -1,5 +1,5 @@
 # Serverless Golang
-Simple Hello World [serverless](https://serverless.com/) application embedding a `golang` 1.8 function 
+Simple Hello World [serverless](https://serverless.com/) service embedding a `golang` 1.8 function 
 into a `python` runtime using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim).
 
 `aws-lambda-go-shim` takes care of:

@@ -10,3 +10,5 @@ provider:
 functions:
   hello:
     handler: handler.Handle
+    events:
+      - http: GET hello
