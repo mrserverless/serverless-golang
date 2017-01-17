@@ -1,14 +1,16 @@
 # Serverless Golang
+Simple Hello World [serverless](https://serverless.com/) application embedding a `golang` 1.8 function 
+into a `python` runtime using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim).
 
-This example uses [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim) to:
+`aws-lambda-go-shim` takes care of:
 
 1. build golang binary into `$HANDLER.so`
 2. packages everything into `$PACKAGE.zip`
 
-And then uses [serverless](https://serverless.com/) to:
+`serverless` then takes care of:
 
 3. deploy function
-4. invoke function  
+4. invoke function
 
 ## Usage
 Prior to running, you should have `go` and `docker` installed. Then get all the dependencies:
