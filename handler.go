@@ -22,6 +22,6 @@ func init() {
 }
 
 func handle(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello, serverless-golang!"))
 	w.Header().Set("X-Powered-By", "serverless-golang")
+	w.Write([]byte("Hello, serverless-golang!"))
 }
