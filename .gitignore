@@ -1,3 +1,4 @@
 .serverless
 .idea/
-bin/
+handler.so
+handler.zip
