@@ -8,7 +8,11 @@ provider:
   region: ${env:AWS_DEFAULT_REGION}
   profile: ${env:AWS_PROFILE}
 functions:
-  hello:
-    handler: handler.Handle
+  hello-net:
+    handler: handler.NetHandle
     events:
-      - http: GET hello
+      - http: GET hello-net
+  hello-events:
+    handler: handler.EventHandle
+    events:
+      - http: GET hello-events

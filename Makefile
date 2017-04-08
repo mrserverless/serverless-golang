@@ -1,6 +1,4 @@
 IMAGE_LAMBDA_GO=eawsy/aws-lambda-go-shim
-# we can't use .serverless folder because it gets wiped by sls deploy
-OUTPUT_DIR=bin
 
 # serverless.yml env vars
 ENV ?= dev
