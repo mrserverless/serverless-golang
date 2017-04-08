@@ -6,7 +6,7 @@ import (
 	"github.com/eawsy/aws-lambda-go-net/service/lambda/runtime/net"
 )
 
-func NewHTTPHandler() apigatewayproxy.Handler {
+func NewNetHandler() apigatewayproxy.Handler {
 	ln := net.Listen()
 
 	// Amazon API Gateway Binary support out of the box.
@@ -14,12 +14,12 @@ func NewHTTPHandler() apigatewayproxy.Handler {
 
 	// Any Go framework complying with the Go http.Handler interface can be used.
 	// This includes, but is not limited to, Vanilla Go, Gin, Echo, Gorrila, Goa, etc.
-	go http.Serve(ln, http.HandlerFunc(handleHTTP))
+	go http.Serve(ln, http.HandlerFunc(hello))
 
 	return handle
 }
 
-func handleHTTP(w http.ResponseWriter, r *http.Request) {
+func hello(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-Powered-By", "serverless-golang")
 	w.Write([]byte("Hello, serverless-golang!"))
 }
