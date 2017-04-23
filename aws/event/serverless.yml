@@ -1,4 +1,4 @@
-service: serverless-golang-net
+service: serverless-golang-event
 package:
   artifact: handler.zip
 provider:
@@ -8,7 +8,7 @@ provider:
   region: ${env:AWS_DEFAULT_REGION}
   profile: ${env:AWS_PROFILE}
 functions:
-  hello-net:
-    handler: handler.NetHandle
+  hello-event:
+    handler: handler.EventHandle
     events:
-      - http: GET hello-net
+      - http: GET hello-event
