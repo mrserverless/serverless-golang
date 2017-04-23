@@ -71,9 +71,9 @@ used for authentication on AWS.
 
 Then deploy the function by running this command:
 
-    make
+    make clean dockerDist deploy
 
 To uninstall and clean up everything you just need to run:
 
-    make clean delete
+    make clean remove
 
