@@ -48,11 +48,17 @@ strategic Microservices. Serving 1M+ customers with up to 500CCU.
 
 ## Usage
 
-Clone locally into your own Serverless project:
+Install locally into your own Serverless project. For a generic event driven service, use:
 
     serverless install \
-        -u https://github.com/yunspace/serverless-golang \
-        -n my-golang-project
+        -u https://github.com/yunspace/serverless-golang/aws/event \
+        -n my-golang-event-project
+
+For a `go/net` driven project, use:
+
+    serverless install \
+        -u https://github.com/yunspace/serverless-golang/net/event \
+        -n my-golang-net-project
 
 Prior to running, you should have `go`, `make` and `docker` installed. Then once
 in your project directory run this to get all the build dependencies:

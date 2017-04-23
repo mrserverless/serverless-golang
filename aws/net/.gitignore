@@ -1,5 +1,3 @@
 .serverless
-.idea/
 handler.so
 handler.zip
-.env
