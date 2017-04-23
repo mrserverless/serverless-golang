@@ -12,7 +12,3 @@ functions:
     handler: handler.NetHandle
     events:
       - http: GET hello-net
-  hello-events:
-    handler: handler.EventHandle
-    events:
-      - http: GET hello-events
