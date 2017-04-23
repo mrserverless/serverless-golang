@@ -8,13 +8,12 @@ import (
 
 func handlAPIEvent(evt *apigatewayproxyevt.Event, ctx *runtime.Context) (*Response, error) {
 	log.Println(evt)
-	response := &Response {
+	response := &Response{
 		StatusCode: 200,
-		Body: &APIBody{"Hello, serverless-golang!", evt.Body},
-		Headers: make(map[string]string),
+		Headers:    make(map[string]string),
 	}
+	response.SetBody(&APIBody{"Hello, serverless-golang!", evt.Body})
 	response.Headers["X-Powered-By"] = "serverless-golang"
 
 	return response, nil
 }
-
