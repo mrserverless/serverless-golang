@@ -18,11 +18,11 @@ func TestCustomHeader(t *testing.T) {
 
 func TestAPIBody(t *testing.T) {
 	// when
-	r, err := handlAPIEvent(&apigatewayproxyevt.Event{Body: "input"}, &runtime.Context{})
+	r, err := handlAPIEvent(&apigatewayproxyevt.Event{Body: "GET"}, &runtime.Context{})
 
 	// then
 	assert.NoError(t, err)
 	assert.IsType(t, &Response{}, r)
 	//response, _ := r.(*Response)
-	assert.Equal(t, &APIBody{"Hello, serverless-golang!", "input"}, r.Body)
+	assert.Equal(t, "{\"message\":\"Hello, serverless-golang!\",\"input\":\"GET\"}", r.Body)
 }
