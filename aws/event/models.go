@@ -1,16 +1,13 @@
-package event
+package main
 
-type Body struct {
+// special format need by API Gateway response body
+type APIBody struct {
 	Message string `json:"message"`
 	Input   string `json:"input"`
-}
-
-func NewBody(m string, e string) *Body {
-	return &Body{Message: m, Input: e}
 }
 
 type Response struct {
 	StatusCode int          	`json:"statusCode"`
 	Headers    map[string]string  	`json:"headers"`
-	Body       string 		`json:"body"`
+	Body	   *APIBody                `json:"body"`
 }
