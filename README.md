@@ -21,13 +21,13 @@ Use `serverless install` for easy installation.
 For a generic event driven service using `aws-lambda-go-shim`:
 
     serverless install \
-        -u https://github.com/yunspace/serverless-golang/aws/event \
+        -u https://github.com/yunspace/serverless-golang/tree/master/aws/event \
         -n my-golang-event-project
 
 For a `go/net` driven project using `aws-lambda-go-net`:
 
     serverless install \
-        -u https://github.com/yunspace/serverless-golang/net/event \
+        -u https://github.com/yunspace/serverless-golang/tree/master/aws/net \
         -n my-golang-net-project
 
 Prior to running, you should have `go`, `make` and `docker` installed. Then once
