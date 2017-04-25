@@ -6,7 +6,7 @@
 src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png"
 align="right" width="100">](http://serverless.com) 
 
-[serverless](https://serverless.com/) example using `golang` and `AWS Lambda` together. Different to other frameworks
+[serverless](https://serverless.com/) example using `golang` and `AWS Lambda`. This is different to other `node` shim based frameworks
 because it is powered by low latency `python` runtime:
 
 - [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim)
