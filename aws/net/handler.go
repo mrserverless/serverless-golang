@@ -41,14 +41,15 @@ func setUpMux() *mux.Router {
 }
 
 func create(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
 	w.Header().Set("X-Powered-By", "serverless-golang")
 	fmt.Fprintf(w, "[%d] Created", http.StatusCreated)
 }
 
 func read(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
+	id := mux.Vars(r)["id"]
 
+	w.WriteHeader(http.StatusOK)
 	w.Header().Set("X-Powered-By", "serverless-golang")
 	fmt.Fprintf(w, "[%d] Reading Id: %s", http.StatusOK, id)
 }
@@ -59,17 +60,17 @@ func list(w http.ResponseWriter, r *http.Request) {
 }
 
 func update(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
+	id:= mux.Vars(r)["id"]
 
+	w.WriteHeader(http.StatusOK)
 	w.Header().Set("X-Powered-By", "serverless-golang")
 	fmt.Fprintf(w, "[%d] Updated Id: %s", http.StatusOK, id)
 }
 
 func delete(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
+	id := mux.Vars(r)["id"]
 
+	w.WriteHeader(http.StatusOK)
 	w.Header().Set("X-Powered-By", "serverless-golang")
 	fmt.Fprintf(w, "[%d] Deleted Id: %s", http.StatusOK, id)
 }
