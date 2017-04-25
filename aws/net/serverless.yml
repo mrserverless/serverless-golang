@@ -1,4 +1,4 @@
-service: serverless-golang-net
+service: sls-golang-net
 package:
   artifact: handler.zip
 provider:
@@ -8,7 +8,26 @@ provider:
   region: ${env:AWS_DEFAULT_REGION}
   profile: ${env:AWS_PROFILE}
 functions:
-  hello-net:
-    handler: handler.NetHandle
+  crud:
+    handler: handler.Handler
     events:
-      - http: GET hello-net
+      - http:
+          path: todos
+          method: post
+          cors: true
+      - http:
+          path: todos
+          method: get
+          cors: true
+      - http:
+          path: todos/{id}
+          method: get
+          cors: true
+      - http:
+          path: todos/{id}
+          method: put
+          cors: true
+      - http:
+          path: todos/{id}
+          method: delete
+          cors: true

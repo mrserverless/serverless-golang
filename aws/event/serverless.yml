@@ -1,4 +1,4 @@
-service: serverless-golang-event
+service: sls-golang-event
 package:
   artifact: handler.zip
 provider:
