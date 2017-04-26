@@ -51,26 +51,26 @@ func read(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("X-Powered-By", "serverless-golang")
-	fmt.Fprintf(w, "[%d] Reading Id: %s", http.StatusOK, id)
+	fmt.Fprintf(w, "%d - Reading Id: %s", http.StatusOK, id)
 }
 
 func list(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-Powered-By", "serverless-golang")
-	fmt.Fprintf(w, "[%d] Listing All", http.StatusOK)
+	fmt.Fprintf(w, "%d - Listing All", http.StatusOK)
 }
 
 func update(w http.ResponseWriter, r *http.Request) {
 	id:= mux.Vars(r)["id"]
 
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusNoContent)
 	w.Header().Set("X-Powered-By", "serverless-golang")
-	fmt.Fprintf(w, "[%d] Updated Id: %s", http.StatusOK, id)
+	fmt.Fprintf(w, "%d - Updated Id: %s", http.StatusNoContent, id)
 }
 
 func delete(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusNoContent)
 	w.Header().Set("X-Powered-By", "serverless-golang")
-	fmt.Fprintf(w, "[%d] Deleted Id: %s", http.StatusOK, id)
+	fmt.Fprintf(w, "%d - Deleted Id: %s", http.StatusNoContent, id)
 }
