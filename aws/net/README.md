@@ -6,7 +6,7 @@ Start a new project using this example:
 
 	serverless install \
 		-u https://github.com/yunspace/serverless-golang/tree/master/aws/net \
-		-n my-sls-golang-net
+		-n $GOPATH/src/path/my-sls-golang-net
 		
 Deploy the code:
 
