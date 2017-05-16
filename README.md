@@ -22,13 +22,13 @@ For a generic event driven service using `aws-lambda-go-shim`:
 
     serverless install \
         -u https://github.com/yunspace/serverless-golang/tree/master/aws/event \
-        -n my-sls-golang-event
+        -n $GOPATH/src/path/my-sls-golang-event
 
 For a `go/net` driven project using `aws-lambda-go-net`:
 
     serverless install \
         -u https://github.com/yunspace/serverless-golang/tree/master/aws/net \
-        -n my-sls-golang-net
+        -n $GOPATH/src/path/my-sls-golang-net
 
 Prior to running, you should have `go`, `make` and `docker` installed. Then once
 in your project directory run this to get all the build dependencies:
