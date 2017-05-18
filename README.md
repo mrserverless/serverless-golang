@@ -30,10 +30,7 @@ For a `go/net` driven project using `aws-lambda-go-net`:
         -u https://github.com/yunspace/serverless-golang/tree/master/aws/net \
         -n $GOPATH/src/path/my-sls-golang-net
 
-Prior to running, you should have `go`, `make` and `docker` installed. Then once
-in your project directory run this to get all the build dependencies:
-
-    make deps
+Prior to running, you should have `go`, `make` and `docker` installed. 
 
 Make sure to have set the usual environment
 [variables](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment)
@@ -41,11 +38,8 @@ used for authentication on AWS.
 
 Then deploy the function by running this command:
 
-    make dockerDist deploy
-
-To uninstall and clean up everything you just need to run:
-
-    make clean remove
+    make package
+	sls deploy
 
 ## How
 
