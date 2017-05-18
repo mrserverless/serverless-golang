@@ -16,3 +16,10 @@ functions:
     handler: handler.HandleHTTP
     events:
       - http: POST http
+#  kinesis:
+#    handler: handler.HandleKinesis
+#    events:
+#      - stream:
+#          type: kinesis
+#          arn:
+#            Fn::ImportValue: ${env:KINESIS_EXPORT_ARN}

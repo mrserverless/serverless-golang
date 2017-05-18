@@ -5,6 +5,8 @@ import (
 	"github.com/eawsy/aws-lambda-go-core/service/lambda/runtime"
 	"net/http"
 	"encoding/json"
+	"github.com/eawsy/aws-lambda-go-event/service/lambda/runtime/event/kinesisstreamsevt"
+	"log"
 )
 
 func HandleRaw(evt *json.RawMessage, ctx *runtime.Context) (interface{}, error) {
@@ -18,6 +20,13 @@ func HandleRaw(evt *json.RawMessage, ctx *runtime.Context) (interface{}, error) 
 
 func HandleHTTP(evt *apigatewayproxyevt.Event, ctx *runtime.Context) (interface{}, error) {
 	return handle(evt.Body)
+}
+
+func HandleKinesis(evt kinesisstreamsevt.Event, ctx *runtime.Context) (interface{}, error) {
+	for _, record := range evt.Records {
+		log.Printf("received: %s", record.String())
+	}
+	return nil, nil
 }
 
 func handle(body string) (*HTTPResponse, error) {
