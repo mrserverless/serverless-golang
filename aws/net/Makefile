@@ -4,7 +4,7 @@ PACKAGE ?= $(HANDLER)
 GOPATH  ?= $(HOME)/go
 
 # package
-package: clean dockerPull
+package: clean deps dockerPull
 	$(call dockerShim, make _package)
 .PHONY: package
 
