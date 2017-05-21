@@ -7,7 +7,12 @@ import (
 	"encoding/json"
 	"github.com/eawsy/aws-lambda-go-event/service/lambda/runtime/event/kinesisstreamsevt"
 	"log"
+	"github.com/yunspace/serverless-golang/aws/event/apigateway"
 )
+
+type Todo struct {
+	Message string `json:"message"`
+}
 
 func HandleRaw(evt *json.RawMessage, ctx *runtime.Context) (interface{}, error) {
 	bytes, err := evt.MarshalJSON()
@@ -29,8 +34,8 @@ func HandleKinesis(evt kinesisstreamsevt.Event, ctx *runtime.Context) (interface
 	return nil, nil
 }
 
-func handle(body string) (*HTTPResponse, error) {
-	response := &HTTPResponse{
+func handle(body string) (*apigateway.APIGatewayResponse, error) {
+	response := &apigateway.APIGatewayResponse{
 		StatusCode: http.StatusOK,
 		Headers:    make(map[string]string),
 	}
