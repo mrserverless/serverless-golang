@@ -38,7 +38,7 @@ define dockerShim
 	  -e HANDLER=$(HANDLER) \
 	  -e PACKAGE=$(PACKAGE) \
 	  -v $(GOPATH):/go \
-	  -v $(CURDIR):/tmp \
-	  -w /tmp \
+	  -v $(CURDIR):/build \
+	  -w /build \
 	  $(IMAGE_LAMBDA_GO) $1
 endef

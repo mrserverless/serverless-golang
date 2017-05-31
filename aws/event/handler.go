@@ -39,7 +39,7 @@ func handle(body string) (*apigateway.APIGatewayResponse, error) {
 		StatusCode: http.StatusOK,
 		Headers:    make(map[string]string),
 	}
-	response.SetBody(&Todo{body})
+	response.SetBody(body)
 	response.Headers["X-Powered-By"] = "serverless-golang"
 
 	return response, nil
