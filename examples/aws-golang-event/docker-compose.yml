@@ -14,7 +14,7 @@ services:
       - .:/build
       - $GOPATH:/go
     working_dir: /build
-  sls:
+  serverless:
     image: amaysim/aws-serverless:1.13.0
     env_file: .env
     volumes:

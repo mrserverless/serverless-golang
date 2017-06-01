@@ -8,7 +8,7 @@ package: build
 .PHONY: package
 
 deploy:
-	docker-compose run --rm sls make _deploy
+	docker-compose run --rm serverless make _deploy
 .PHONY: deploy
 
 # target to run within container
