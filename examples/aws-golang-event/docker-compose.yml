@@ -1,0 +1,16 @@
+version: '3'
+services:
+  golang:
+    image: golang:1.8
+    env_file: .env
+    volumes:
+      - .:/build
+      - $GOPATH:/go
+    working_dir: /build
+  go-shim:
+    image: eawsy/aws-lambda-go-shim:latest
+    env_file: .env
+    volumes:
+      - .:/build
+      - $GOPATH:/go
+    working_dir: /build

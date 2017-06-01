@@ -14,7 +14,7 @@ type Todo struct {
 	Message string `json:"message"`
 }
 
-func HandleRaw(evt *json.RawMessage, ctx *runtime.Context) (interface{}, error) {
+func HandleRaw(evt *json.RawMessage, _ *runtime.Context) (interface{}, error) {
 	bytes, err := evt.MarshalJSON()
 	if err != nil {
 		return nil, err
@@ -23,11 +23,11 @@ func HandleRaw(evt *json.RawMessage, ctx *runtime.Context) (interface{}, error) 
 	return handle(string(bytes))
 }
 
-func HandleHTTP(evt *apigatewayproxyevt.Event, ctx *runtime.Context) (interface{}, error) {
+func HandleHTTP(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
 	return handle(evt.Body)
 }
 
-func HandleKinesis(evt kinesisstreamsevt.Event, ctx *runtime.Context) (interface{}, error) {
+func HandleKinesis(evt kinesisstreamsevt.Event, _ *runtime.Context) (interface{}, error) {
 	for _, record := range evt.Records {
 		log.Printf("received: %s", record.String())
 	}

@@ -1,6 +1,6 @@
 service: sls-golang-net
 package:
-  artifact: handler.zip
+  artifact: ${PACKAGE}.zip
 provider:
   name: aws
   runtime: python2.7

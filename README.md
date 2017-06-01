@@ -20,15 +20,13 @@ Use `serverless install` for easy installation.
 
 For a generic event driven service using `aws-lambda-go-shim`:
 
-    serverless install \
-        -u https://github.com/yunspace/serverless-golang/tree/master/aws/event \
-        -n $GOPATH/src/path/my-sls-golang-event
+	cd $GOPATH/src/your-path
+    serverless install -u https://github.com/yunspace/serverless-golang/tree/master/aws/event -n your-project
 
 For a `go/net` driven project using `aws-lambda-go-net`:
 
-    serverless install \
-        -u https://github.com/yunspace/serverless-golang/tree/master/aws/net \
-        -n $GOPATH/src/path/my-sls-golang-net
+	cd $GOPATH/src/your-path
+    serverless install -u https://github.com/yunspace/serverless-golang/tree/master/aws/net -n your-project
 
 Prior to running, you should have `go`, `make` and `docker` installed. 
 
@@ -41,33 +39,9 @@ Then deploy the function by running this command:
     make package
 	sls deploy
 
-## How
-
-How does it work? Quite simple actually. `eawsy` shims build process will:
-
-1. build golang binary into `$HANDLER.so`
-2. zip `$HANDLER.so` and python shims into `$PACKAGE.zip`
-
-`serverless` framework then will:
-
-3. deploy function on AWS
-4. invoke function
-
-## Why
-
-This project came about because:
-
-- This discussion [thread](https://github.com/serverless/serverless/issues/2712)
-- Python has the fastest cold startup time and thus minimal cold start latency.
-  Every other golang lambda framework out there uses node shims which are less
-  efficient, as per these benchmarks:
-  [aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim) and
-  [lambda-test](https://github.com/berezovskyi/lambda-test)
-- Golang is awesome and a lot of people
-  [requested](https://twitter.com/awscloud/status/659795641204260864) AWS Lambda
-  Go support.
-
-## Who
+## Usage
 
 Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build
 strategic Microservices. Serving 1M+ customers with up to 500CCU.
+
+If your company is 
