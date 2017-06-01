@@ -1,7 +1,5 @@
 # Serverless Golang
 
-## What
-
 [<img
 src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png"
 align="right" width="100">](http://serverless.com) 
@@ -14,34 +12,29 @@ because it is powered by low latency `python` runtime:
 
 It works with standard Lambda events or API Gateway HTTP requests.
 
-## Usage
+## Install
 
-Use `serverless install` for easy installation. 
-
-For a generic event driven service using `aws-lambda-go-shim`:
+Use `serverless install` for easy installation:
 
 	cd $GOPATH/src/your-path
-    serverless install -u https://github.com/yunspace/serverless-golang/tree/master/aws/event -n your-project
 
-For a `go/net` driven project using `aws-lambda-go-net`:
+	# event driven based on aws-lambda-go-shim
+    serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-event -n your-project
 
-	cd $GOPATH/src/your-path
-    serverless install -u https://github.com/yunspace/serverless-golang/tree/master/aws/net -n your-project
-
-Prior to running, you should have `go`, `make` and `docker` installed. 
-
-Make sure to have set the usual environment
-[variables](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment)
-used for authentication on AWS.
-
-Then deploy the function by running this command:
-
-    make package
-	sls deploy
+	# go net style based on aws-lambda-go-net 
+    serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-net -n your-project
 
 ## Usage
+
+All you need is `make`, `docker` and `docker-compose`
+
+Make sure you setup your environment variables in `.env` file based on the example in `env.template`.
+
+Then siomply build and deploy the function by running:
+
+	make package deploy
+
+## Clients
 
 Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build
 strategic Microservices. Serving 1M+ customers with up to 500CCU.
-
-If your company is 

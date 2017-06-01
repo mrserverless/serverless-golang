@@ -1,12 +1,11 @@
 service: sls-golang-event
 package:
-  artifact: ${PACKAGE}.zip
+  artifact: ${env:PACKAGE}.zip
 provider:
   name: aws
   runtime: python2.7
   stage: ${env:ENV}
-  region: ${env:AWS_DEFAULT_REGION}
-  profile: ${env:AWS_PROFILE}
+  region: ${env:AWS_REGION}
 functions:
   raw:
     handler: handler.HandleRaw

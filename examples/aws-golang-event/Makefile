@@ -7,6 +7,10 @@ package: build
 	docker-compose run --rm go-shim make _package
 .PHONY: package
 
+deploy:
+	docker-compose run --rm sls make _deploy
+.PHONY: deploy
+
 # target to run within container
 _clean:
 	@rm -rf $(HANDLER) $(HANDLER).so $(PACKAGE).zip
@@ -20,3 +24,7 @@ _build: _clean _deps
 _package:
 	@pack $(HANDLER) $(HANDLER).so $(PACKAGE).zip
 	@chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
+
+_deploy:
+	rm -fr .serverless
+	sls deploy -v
