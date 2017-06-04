@@ -4,15 +4,12 @@ services:
     image: amaysim/golang:1.8.3
     env_file: .env
     volumes:
-      - .:/build
-      - $GOPATH/src:/go/src
-    working_dir: /build
+      - ${GOPATH}/src:/go/src
   go-shim:
     image: eawsy/aws-lambda-go-shim:latest
     env_file: .env
     volumes:
       - .:/build
-      - $GOPATH/src:/go/src
     working_dir: /build
   serverless:
     image: amaysim/aws-serverless:1.13.0

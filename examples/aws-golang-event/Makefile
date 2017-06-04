@@ -1,10 +1,14 @@
+
+# strip GOPATH to mount the correct docker WORKDIR
+WORKDIR ?= $(CURDIR:$(GOPATH)%=/go%)
+
 # package
 build:
-	docker-compose run --rm golang make _build
+	docker-compose run --rm -w $(WORKDIR) golang make _build
 .PHONY: build
 
 test:
-	docker-compose run --rm golang make _test
+	docker-compose run --rm -w $(WORKDIR) golang make _test
 .PHONY: test
 
 package: build
