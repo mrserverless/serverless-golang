@@ -3,6 +3,10 @@ build:
 	docker-compose run --rm golang make _build
 .PHONY: build
 
+test:
+	docker-compose run --rm golang make _test
+.PHONY: test
+
 package: build
 	docker-compose run --rm go-shim make _package
 .PHONY: package
@@ -16,10 +20,13 @@ _clean:
 	@rm -rf $(HANDLER) $(HANDLER).so $(PACKAGE).zip
 
 _deps:
-	@go get -d
+	@dep ensure -update
 
 _build: _clean _deps
 	@go build -buildmode=plugin -ldflags='-w -s' -o $(HANDLER).so
+
+_test: _deps
+	@go test
 
 _package:
 	@pack $(HANDLER) $(HANDLER).so $(PACKAGE).zip
