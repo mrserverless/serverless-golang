@@ -9,6 +9,14 @@ type APIGatewayResponse struct {
 	Base64Encoded bool                `json:"isBase64Encoded"`
 }
 
+func NewAPIGatewayResponse(status int) *APIGatewayResponse {
+	return &APIGatewayResponse{
+		StatusCode:    status,
+		Base64Encoded: false,
+		Headers:       make(map[string]string),
+	}
+}
+
 // inspired by serverless-java
 func (r *APIGatewayResponse) SetBody(b interface{}) {
 	bytes, _ := json.Marshal(b)
