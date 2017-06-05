@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"github.com/eawsy/aws-lambda-go-event/service/lambda/runtime/event/apigatewayproxyevt"
 	"github.com/yunspace/serverless-golang/aws/event/apigateway"
-	"github.com/aws/aws-sdk-go/private/model/api"
 )
 
 func TestHandleHTTP(t *testing.T) {
