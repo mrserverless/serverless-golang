@@ -15,16 +15,24 @@ type Todo struct {
 }
 
 func HandleRaw(evt *json.RawMessage, _ *runtime.Context) (interface{}, error) {
-	bytes, err := evt.MarshalJSON()
-	if err != nil {
-		return nil, err
+	t := &Todo{}
+	err := json.Unmarshal(*evt, t); if err != nil {
+		log.Printf("unmarshalling error: %s", err.Error())
+		return apigateway.NewAPIGatewayResponse(http.StatusUnprocessableEntity), nil
 	}
 
-	return handle(string(bytes))
+	resp := apigateway.NewAPIGatewayResponse(http.StatusOK)
+	resp.SetBody(evt)
+	return resp, nil
 }
 
 func HandleHTTP(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
-	return handle(evt.Body)
+	t := &Todo{}
+	err := json.Unmarshal([]byte(evt.Body), t); if err != nil {
+		log.Printf("unmarshalling error: %s", err.Error())
+		return apigateway.NewAPIGatewayResponse(http.StatusUnprocessableEntity), nil
+	}
+	return handle(t)
 }
 
 func HandleKinesis(evt kinesisstreamsevt.Event, _ *runtime.Context) (interface{}, error) {
@@ -34,12 +42,9 @@ func HandleKinesis(evt kinesisstreamsevt.Event, _ *runtime.Context) (interface{}
 	return nil, nil
 }
 
-func handle(body string) (*apigateway.APIGatewayResponse, error) {
-	response := &apigateway.APIGatewayResponse{
-		StatusCode: http.StatusOK,
-		Headers:    make(map[string]string),
-	}
-	response.SetBody(body)
+func handle(todo *Todo) (*apigateway.APIGatewayResponse, error) {
+	response := apigateway.NewAPIGatewayResponse(http.StatusOK)
+	response.SetBody(todo)
 	response.Headers["X-Powered-By"] = "serverless-golang"
 
 	return response, nil
