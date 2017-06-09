@@ -9,11 +9,11 @@ services:
     image: eawsy/aws-lambda-go-shim:latest
     env_file: .env
     volumes:
-      - .:/build
-    working_dir: /build
+      - ${GOPATH}/src:/go/src
   serverless:
-    image: amaysim/aws-serverless:1.13.0
+    image: amaysim/serverless:1.14.0
     env_file: .env
     volumes:
       - .:/build
+      - ~/.aws:/root/.aws
     working_dir: /build

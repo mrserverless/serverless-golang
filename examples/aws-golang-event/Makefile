@@ -2,22 +2,31 @@
 # strip GOPATH to mount the correct docker WORKDIR
 WORKDIR ?= $(CURDIR:$(GOPATH)%=/go%)
 
-# package
-build:
-	docker-compose run --rm -w $(WORKDIR) golang make _build
+# entrypoints
+build: clean deps
+	docker-compose run --rm -w $(WORKDIR) go-shim make _build
 .PHONY: build
 
-test:
+test: deps
 	docker-compose run --rm -w $(WORKDIR) golang make _test
 .PHONY: test
 
 package: build
-	docker-compose run --rm go-shim make _package
+	docker-compose run --rm -w $(WORKDIR) go-shim make _package
 .PHONY: package
 
 deploy:
 	docker-compose run --rm serverless make _deploy
 .PHONY: deploy
+
+# helpers
+clean:
+	docker-compose run --rm -w $(WORKDIR) golang make _clean
+.PHONY: clean
+
+deps:
+	docker-compose run --rm -w $(WORKDIR) golang make _deps
+.PHONY: build
 
 # target to run within container
 _clean:
@@ -26,10 +35,10 @@ _clean:
 _deps:
 	@dep ensure -update
 
-_build: _clean _deps
+_build:
 	@go build -buildmode=plugin -ldflags='-w -s' -o $(HANDLER).so
 
-_test: _deps
+_test:
 	@go test
 
 _package:
