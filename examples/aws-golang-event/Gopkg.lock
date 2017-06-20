@@ -35,7 +35,7 @@
   branch = "master"
   name = "github.com/yunspace/serverless-golang"
   packages = ["aws/event/apigateway"]
-  revision = "6a709c3c950c95a0b66f890902cbfb5c6b92af71"
+  revision = "940cc9239fd36e2a0f5fe07b2c157b9bc1a76c9f"
 
 [solve-meta]
   analyzer-name = "dep"

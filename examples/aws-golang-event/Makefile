@@ -8,7 +8,7 @@ build: clean deps
 .PHONY: build
 
 test: deps
-	docker-compose run --rm -w $(WORKDIR) golang make _test
+	docker-compose run --rm -w $(WORKDIR) go-shim make _test
 .PHONY: test
 
 package: build
@@ -21,11 +21,11 @@ deploy:
 
 # helpers
 clean:
-	docker-compose run --rm -w $(WORKDIR) golang make _clean
+	docker-compose run --rm -w $(WORKDIR) go-shim make _clean
 .PHONY: clean
 
 deps:
-	docker-compose run --rm -w $(WORKDIR) golang make _deps
+	docker-compose run --rm -w $(WORKDIR) go-shim make _deps
 .PHONY: build
 
 # target to run within container

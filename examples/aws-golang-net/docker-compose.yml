@@ -1,12 +1,7 @@
 version: '3'
 services:
-  golang:
-    image: amaysim/golang:1.8.3
-    env_file: .env
-    volumes:
-      - ${GOPATH}/src:/go/src
   go-shim:
-    image: eawsy/aws-lambda-go-shim:latest
+    image: yunspace/serverless-go-shim:latest
     env_file: .env
     volumes:
       - ${GOPATH}/src:/go/src
