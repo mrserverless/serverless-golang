@@ -1,7 +1,7 @@
-version: '3'
+version: '2.1'
 services:
   go-shim:
-    image: yunspace/serverless-go-shim:latest
+    image: yunspace/serverless-golang:1.8.3
     env_file: .env
     volumes:
       - ${GOPATH}/src:/go/src
