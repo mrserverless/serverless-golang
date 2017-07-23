@@ -38,6 +38,6 @@ func NewAPIGatewayResponseWithError(status int, error error) *APIGatewayResponse
 
 // inspired by serverless-java
 func (r *APIGatewayResponse) SetBody(b interface{}) {
-	bytes, _ := json.Marshal(b)
+	bytes, _ := json.MarshalIndent(b,"","")
 	r.Body = string(bytes)
 }

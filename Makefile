@@ -7,7 +7,7 @@ dockerPull:
 
 dockerBuild:
 	docker build -t $(IMAGE_NAME) .
-.PHONY: dockerPull
+.PHONY: dockerBuild
 
 dockerPull:
 	docker run --rm -it -v $(CURDIR):/opt/app $(IMAGE_NAME) bash

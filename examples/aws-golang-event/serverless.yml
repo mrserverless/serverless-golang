@@ -7,18 +7,61 @@ provider:
   stage: ${env:ENV}
   region: ${env:AWS_REGION}
 functions:
-  raw:
-    handler: handler.HandleRaw
+  create:
+    handler: handler.Create
     events:
-      - http: POST raw
-  http:
-    handler: handler.HandleHTTP
+      - http:
+          path: todos
+          method: post
+          cors: true
+
+  list:
+    handler: handler.List
     events:
-      - http: POST http
-#  kinesis:
-#    handler: handler.HandleKinesis
-#    events:
-#      - stream:
-#          type: kinesis
-#          arn:
-#            Fn::ImportValue: ${env:KINESIS_EXPORT_ARN}
+      - http:
+          path: todos
+          method: get
+          cors: true
+
+  get:
+    handler: handler.Get
+    events:
+      - http:
+          path: todos/{id}
+          method: get
+          cors: true
+
+  update:
+    handler: handler.Update
+    events:
+      - http:
+          path: todos/{id}
+          method: put
+          cors: true
+
+  delete:
+    handler: handler.Delete
+    events:
+      - http:
+          path: todos/{id}
+          method: delete
+          cors: true
+
+#resources:
+#  Resources:
+#    TodosDynamoDbTable:
+#      Type: 'AWS::DynamoDB::Table'
+#      DeletionPolicy: Retain
+#      Properties:
+#        AttributeDefinitions:
+#          -
+#            AttributeName: id
+#            AttributeType: S
+#        KeySchema:
+#          -
+#            AttributeName: id
+#            KeyType: HASH
+#        ProvisionedThroughput:
+#          ReadCapacityUnits: 1
+#          WriteCapacityUnits: 1
+#        TableName: ${self:provider.environment.DYNAMODB_TABLE}
