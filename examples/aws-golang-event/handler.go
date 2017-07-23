@@ -5,47 +5,82 @@ import (
 	"github.com/eawsy/aws-lambda-go-core/service/lambda/runtime"
 	"net/http"
 	"encoding/json"
-	"github.com/eawsy/aws-lambda-go-event/service/lambda/runtime/event/kinesisstreamsevt"
 	"log"
 	"github.com/yunspace/serverless-golang/aws/event/apigateway"
+	"github.com/yunspace/serverless-golang/examples/aws-golang-event/todo"
+	"github.com/satori/go.uuid"
 )
 
-type Todo struct {
-	Message string `json:"message"`
-}
 
-func HandleRaw(evt *json.RawMessage, _ *runtime.Context) (interface{}, error) {
-	t := &Todo{}
-	err := json.Unmarshal(*evt, t); if err != nil {
-		log.Printf("unmarshalling error: %s", err.Error())
-		return apigateway.NewAPIGatewayResponse(http.StatusUnprocessableEntity), nil
+func Create(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
+	t, err := unmarshalEvent(evt)
+	if err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
 	}
-
-	resp := apigateway.NewAPIGatewayResponse(http.StatusOK)
-	resp.SetBody(evt)
-	return resp, nil
-}
-
-func HandleHTTP(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
-	t := &Todo{}
-	err := json.Unmarshal([]byte(evt.Body), t); if err != nil {
-		log.Printf("unmarshalling error: %s", err.Error())
-		return apigateway.NewAPIGatewayResponse(http.StatusUnprocessableEntity), nil
+	err = todo.Create(t)
+	if err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusInternalServerError, err), nil
 	}
-	return handle(t)
+	return successResponse(http.StatusCreated, t)
 }
 
-func HandleKinesis(evt kinesisstreamsevt.Event, _ *runtime.Context) (interface{}, error) {
-	for _, record := range evt.Records {
-		log.Printf("received: %s", record.String())
+func Get(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
+	id, err := uuid.FromString(evt.PathParameters["id"])
+	if err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
 	}
-	return nil, nil
+	t := todo.Get(id)
+	if t == nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusNotFound, nil), nil
+	}
+	return successResponse(http.StatusOK, t)
 }
 
-func handle(todo *Todo) (*apigateway.APIGatewayResponse, error) {
-	response := apigateway.NewAPIGatewayResponse(http.StatusOK)
-	response.SetBody(todo)
+func List(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
+
+	todos := todo.List()
+
+	response := apigateway.NewAPIGatewayResponseWithBody(http.StatusOK, todos)
 	response.Headers["X-Powered-By"] = "serverless-golang"
 
+	return response, nil
+}
+
+func Update(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
+	id, err := uuid.FromString(evt.PathParameters["id"])
+	if err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
+	}
+	t, err := unmarshalEvent(evt)
+	if err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
+	}
+	t.ID = id
+	todo.Update(t)
+	return successResponse(http.StatusOK, t)
+}
+
+func Delete(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
+	id, err := uuid.FromString(evt.PathParameters["id"])
+	if err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
+	}
+
+	todo.Delete(id)
+	return successResponse(http.StatusNoContent, nil)
+}
+
+func unmarshalEvent(evt *apigatewayproxyevt.Event) (*todo.Todo, error) {
+	t := &todo.Todo{}
+	err := json.Unmarshal([]byte(evt.Body), t); if err != nil {
+		log.Printf("unmarshalling error: %s", err.Error())
+		return nil, err
+	}
+	return t, nil
+}
+
+func successResponse(status int, todo *todo.Todo) (*apigateway.APIGatewayResponse, error) {
+	response := apigateway.NewAPIGatewayResponseWithBody(status, todo)
+	response.Headers["X-Powered-By"] = "serverless-golang"
 	return response, nil
 }

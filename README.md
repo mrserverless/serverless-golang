@@ -35,7 +35,7 @@ Note you must have `$GOPATH` set and your new project must reside in `$GOPATH/sr
 
 All you need is `make`, `docker` and `docker-compose`
 
-Make sure you setup your environment variables in `.env` file based on the example in `env.template`.
+Make sure you setup your environment variables in `.env` file based on the example in `env.example`.
 
 Then simply build and deploy the function by running:
 

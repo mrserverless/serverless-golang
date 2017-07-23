@@ -1,14 +1,14 @@
-GO_VERSION = 1.8.3
-IMAGE_NAME ?= yunspace/serverless-golang:$(GO_VERSION)
-TAG = $(GO_VERSION)
+SLS_VERSION = 1.17.0
+IMAGE_NAME ?= yunspace/serverless-golang:$(SLS_VERSION)
+TAG = $(SLS_VERSION)
 
 dockerPull:
 	docker pull $(IMAGE_NAME)
 .PHONY: dockerPull
 
-dockerPull:
+dockerBuild:
 	docker build -t $(IMAGE_NAME) .
-.PHONY: dockerPull
+.PHONY: dockerBuild
 
 dockerPull:
 	docker run --rm -it -v $(CURDIR):/opt/app $(IMAGE_NAME) bash
