@@ -17,6 +17,25 @@ func NewAPIGatewayResponse(status int) *APIGatewayResponse {
 	}
 }
 
+func NewAPIGatewayResponseWithBody(status int, body interface{}) *APIGatewayResponse {
+	r := &APIGatewayResponse{
+		StatusCode:    status,
+		Base64Encoded: false,
+		Headers:       make(map[string]string),
+	}
+	r.SetBody(body)
+	return r
+}
+
+func NewAPIGatewayResponseWithError(status int, error error) *APIGatewayResponse {
+	return &APIGatewayResponse{
+		StatusCode:    status,
+		Base64Encoded: false,
+		Headers:       make(map[string]string),
+		Body:          error.Error(),
+	}
+}
+
 // inspired by serverless-java
 func (r *APIGatewayResponse) SetBody(b interface{}) {
 	bytes, _ := json.Marshal(b)
