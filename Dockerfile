@@ -1,6 +1,6 @@
 FROM eawsy/aws-lambda-go-shim:latest
 
-ENV SERVERLESS serverless@1.15.3
+ENV SERVERLESS serverless@1.17.0
 
 RUN true \
 	&& yum -q -e 0 -y update || true \
