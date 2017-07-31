@@ -19,6 +19,10 @@ deploy:
 	docker-compose run --rm serverless make _deploy
 .PHONY: deploy
 
+remove:
+	docker-compose run --rm serverless make _remove
+.PHONY: deploy
+
 # helpers
 clean:
 	docker-compose run --rm -w $(WORKDIR) go-shim make _clean
@@ -48,3 +52,6 @@ _package:
 _deploy:
 	rm -fr .serverless
 	sls deploy -v
+
+_remove:
+	sls remove -v
