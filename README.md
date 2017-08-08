@@ -1,8 +1,11 @@
 # Serverless Golang
 
+![alt text](./gopher.jpg "Serverless Golang gopher")
+> Gopher inspired by Ashley McNamara (@ashleymcnamara) and Renee French artworks
+
 [<img
 src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png"
-align="right" width="100">](http://serverless.com) 
+align="right" width="100">](http://serverless.com)
 
 [serverless](https://serverless.com/) example using `golang` and `AWS Lambda`. This is different to other `node` shim based frameworks
 because it is powered by low latency `python` runtime:
@@ -15,7 +18,7 @@ because it is powered by low latency `python` runtime:
 
 - works with AWS Lambda event sources or API Gateway HTTP requests.
 - go vendor support with default [dep](https://github.com/golang/dep). Can be swapped out easily.
-- use `docker` for easy testing and ensure consistent dependencies across `golang`, `python` and `serverless` 
+- use `docker` for easy testing and ensure consistent dependencies across `golang`, `python` and `serverless`
 
 ## Install
 
@@ -26,7 +29,7 @@ Use `serverless install` for easy installation:
 	# event driven based on aws-lambda-go-shim
     serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-event -n your-app
 
-	# go net style based on aws-lambda-go-net 
+	# go net style based on aws-lambda-go-net
     serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-net -n your-app
 
 Note you must have `$GOPATH` set and your new project must reside in `$GOPATH/src/your-app`
