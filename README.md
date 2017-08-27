@@ -7,17 +7,18 @@
 src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png"
 align="right" width="100">](http://serverless.com)
 
-[serverless](https://serverless.com/) examples using `golang` and `AWS Lambda`. This is different to other `node` shim based frameworks
-because it is powered by low latency `python` runtime:
+[serverless](https://serverless.com/) Golang example projects. 
 
-- [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim)
-- [eawsy/aws-lambda-go-net](https://github.com/eawsy/aws-lambda-go-net)
+## Performance
+For AWS, we leverage eawsy's python based [AWS Lambda Go Shim](https://github.com/eawsy/aws-lambda-go-shim) for superior 
+performance compared to Node.js shims:
 
+![Benchmark](https://raw.githubusercontent.com/eawsy/aws-lambda-go-shim/master/asset/bench_1000.png)
 
 ## Features
 - works with AWS Lambda event sources or API Gateway HTTP requests.
 - go vendor support with default [dep](https://github.com/golang/dep). Can be swapped out easily.
-- use `docker` for easy testing and ensure consistent dependencies across `golang`, `python` and `serverless`
+- use `docker` and `docker-compose` for easy testing and ensure consistent dependencies across `golang`, `python` and `serverless`
 
 ## Usage
 Prerequisites:
@@ -26,9 +27,8 @@ Prerequisites:
 
 See each individual example for detailed instructions:
 
-- [Serverless Golang Event](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-event/README.md)
-- [Serverless Golang Net](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-net/README.md)
-
+- [Serverless Golang Event](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-event/)
+- [Serverless Golang Net](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-net/)
 
 ## Clients
 Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build
