@@ -1,14 +1,9 @@
 version: '2.1'
 services:
-  go-shim:
-    image: yunspace/serverless-golang:1.8.3
+  sls-go:
+    image: yunspace/serverless-golang:1.20.1
     env_file: .env
     volumes:
-      - ${GOPATH}/src:/go/src
-  serverless:
-    image: amaysim/serverless:1.14.0
-    env_file: .env
-    volumes:
-      - .:/build
+      - .:${WORKDIR}
       - ~/.aws:/root/.aws
-    working_dir: /build
+    working_dir: ${WORKDIR}

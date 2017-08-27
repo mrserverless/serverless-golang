@@ -16,7 +16,7 @@
 [[projects]]
   branch = "master"
   name = "github.com/eawsy/aws-lambda-go-event"
-  packages = ["service/lambda/runtime/event/apigatewayproxyevt","service/lambda/runtime/event/kinesisstreamsevt"]
+  packages = ["service/lambda/runtime/event/apigatewayproxyevt"]
   revision = "a318481f661f091bafea408f9967cb1ac5bf8905"
 
 [[projects]]
@@ -26,20 +26,26 @@
   version = "v1.0.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/stretchr/testify"
-  packages = ["assert"]
-  revision = "f6abca593680b2315d2075e0f5e2a9751e3f431a"
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  revision = "879c5887cd475cd7864858769793b2ceb0d44feb"
+  version = "v1.1.0"
 
 [[projects]]
   branch = "master"
+  name = "github.com/stretchr/testify"
+  packages = ["assert"]
+  revision = "890a5c3458b43e6104ff5da8dfa139d013d77544"
+
+[[projects]]
+  branch = "wip"
   name = "github.com/yunspace/serverless-golang"
-  packages = ["aws/event/apigateway"]
-  revision = "940cc9239fd36e2a0f5fe07b2c157b9bc1a76c9f"
+  packages = ["aws/event/apigateway","examples/todo"]
+  revision = "c08aae87c62c99d82eb8dc9c3f0ba16bea1831bb"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ec25cb8556e65bea2bddc32dd579e03fd9fe27267d10dcb7f63e08e49214060a"
+  inputs-digest = "853eef19381bb3049e5a8833e0b710c47f0a35fe37238767408a21faafca531e"
   solver-name = "gps-cdcl"
   solver-version = 1

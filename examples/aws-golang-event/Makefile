@@ -1,40 +1,43 @@
-
-# strip GOPATH to mount the correct docker WORKDIR
-WORKDIR ?= $(CURDIR:$(GOPATH)%=/go%)
+HANDLER=handler
+PACKAGE=package
 
 # entrypoints
 build: clean deps
-	docker-compose run --rm -w $(WORKDIR) go-shim make _build
+	docker-compose run --rm sls-go make _build
 .PHONY: build
 
 test: deps
-	docker-compose run --rm -w $(WORKDIR) go-shim make _test
+	docker-compose run --rm sls-go make _test
 .PHONY: test
 
-package: build
-	docker-compose run --rm -w $(WORKDIR) go-shim make _package
+package: test build
+	docker-compose run --rm sls-go make _package
 .PHONY: package
 
 deploy:
-	docker-compose run --rm serverless make _deploy
+	docker-compose run --rm sls-go make _deploy
 .PHONY: deploy
 
 remove:
-	docker-compose run --rm serverless make _remove
-.PHONY: deploy
+	docker-compose run --rm sls-go make _remove
+.PHONY: remove
+
+shell:
+	docker-compose run --rm sls-go bash
+.PHONY: shell
 
 # helpers
 clean:
-	docker-compose run --rm -w $(WORKDIR) go-shim make _clean
+	docker-compose run --rm sls-go make _clean
 .PHONY: clean
 
 deps:
-	docker-compose run --rm -w $(WORKDIR) go-shim make _deps
-.PHONY: build
+	docker-compose run --rm sls-go make _deps
+.PHONY: deps
 
 # target to run within container
 _clean:
-	@rm -rf $(HANDLER) $(HANDLER).so $(PACKAGE).zip
+	@rm -rf $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
 
 _deps:
 	@dep ensure -update
