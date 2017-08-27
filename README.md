@@ -22,8 +22,8 @@ performance compared to Node.js shims:
 
 ## Usage
 Prerequisites:
-- installed `serverless`, `go`, `make` and docker
-- set `$GOPATH` and your new project must reside in `$GOPATH/src/path/your-app`
+- have `serverless`, `go`, `make` and `docker`
+- have correct `$GOPATH` and your new project must reside in `$GOPATH/src/path/your-app`
 
 See each individual example for detailed instructions:
 
