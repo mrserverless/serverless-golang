@@ -1,6 +1,6 @@
 service: sls-golang-event
 package:
-  artifact: ${env:PACKAGE}.zip
+  artifact: package.zip
 provider:
   name: aws
   runtime: python2.7

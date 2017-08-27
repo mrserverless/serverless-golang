@@ -7,17 +7,22 @@ import (
 	"encoding/json"
 	"log"
 	"github.com/yunspace/serverless-golang/aws/event/apigateway"
-	"github.com/yunspace/serverless-golang/examples/aws-golang-event/todo"
+	"github.com/yunspace/serverless-golang/examples/todo"
 	"github.com/satori/go.uuid"
 )
 
+var todoService todo.TodoService
+
+func init() {
+	todoService = todo.NewMockTodoService()
+}
 
 func Create(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
 	t, err := unmarshalEvent(evt)
 	if err != nil {
 		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
 	}
-	err = todo.Create(t)
+	err = todoService.Create(t)
 	if err != nil {
 		return apigateway.NewAPIGatewayResponseWithError(http.StatusInternalServerError, err), nil
 	}
@@ -29,21 +34,18 @@ func Get(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error)
 	if err != nil {
 		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
 	}
-	t := todo.Get(id)
-	if t == nil {
-		return apigateway.NewAPIGatewayResponseWithError(http.StatusNotFound, nil), nil
+	t, err := todoService.Get(id)
+	if err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusNotFound, err), nil
 	}
 	return successResponse(http.StatusOK, t)
 }
 
-func List(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
+func List(_ *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
 
-	todos := todo.List()
+	todos, _ := todoService.List()
 
-	response := apigateway.NewAPIGatewayResponseWithBody(http.StatusOK, todos)
-	response.Headers["X-Powered-By"] = "serverless-golang"
-
-	return response, nil
+	return successResponse(http.StatusOK, todos)
 }
 
 func Update(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, error) {
@@ -56,7 +58,9 @@ func Update(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, err
 		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
 	}
 	t.ID = id
-	todo.Update(t)
+	if err := todoService.Update(t); err != nil {
+		return apigateway.NewAPIGatewayResponseWithError(http.StatusNotFound, err), nil
+	}
 	return successResponse(http.StatusOK, t)
 }
 
@@ -66,7 +70,7 @@ func Delete(evt *apigatewayproxyevt.Event, _ *runtime.Context) (interface{}, err
 		return apigateway.NewAPIGatewayResponseWithError(http.StatusUnprocessableEntity, err), nil
 	}
 
-	todo.Delete(id)
+	todoService.Delete(id)
 	return successResponse(http.StatusNoContent, nil)
 }
 
@@ -79,7 +83,7 @@ func unmarshalEvent(evt *apigatewayproxyevt.Event) (*todo.Todo, error) {
 	return t, nil
 }
 
-func successResponse(status int, todo *todo.Todo) (*apigateway.APIGatewayResponse, error) {
+func successResponse(status int, todo interface{}) (*apigateway.APIGatewayResponse, error) {
 	response := apigateway.NewAPIGatewayResponseWithBody(status, todo)
 	response.Headers["X-Powered-By"] = "serverless-golang"
 	return response, nil

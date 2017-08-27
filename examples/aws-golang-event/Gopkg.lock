@@ -35,17 +35,17 @@
   branch = "master"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
-  revision = "05e8a0eda380579888eb53c394909df027f06991"
+  revision = "890a5c3458b43e6104ff5da8dfa139d013d77544"
 
 [[projects]]
+  branch = "wip"
   name = "github.com/yunspace/serverless-golang"
-  packages = ["aws/event/apigateway"]
-  revision = "fada5b002b2da9a9154d9510cf9b906de97007ca"
-  version = "1.17.0"
+  packages = ["aws/event/apigateway","examples/todo"]
+  revision = "c08aae87c62c99d82eb8dc9c3f0ba16bea1831bb"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1d1ca297490fd9bb93810202041c1ea9842d97d290b1cc061ab283422418b1af"
+  inputs-digest = "853eef19381bb3049e5a8833e0b710c47f0a35fe37238767408a21faafca531e"
   solver-name = "gps-cdcl"
   solver-version = 1

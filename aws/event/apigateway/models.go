@@ -41,3 +41,8 @@ func (r *APIGatewayResponse) SetBody(b interface{}) {
 	bytes, _ := json.MarshalIndent(b,"","")
 	r.Body = string(bytes)
 }
+
+func (r *APIGatewayResponse) SetMarshallableBody(b json.Marshaler) {
+	bytes, _ := b.MarshalJSON()
+	r.Body = string(bytes)
+}

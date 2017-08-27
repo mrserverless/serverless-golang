@@ -1,4 +1,5 @@
-
+HANDLER=handler
+PACKAGE=package
 
 # entrypoints
 build: clean deps
@@ -9,7 +10,7 @@ test: deps
 	docker-compose run --rm sls-go make _test
 .PHONY: test
 
-package: build
+package: test build
 	docker-compose run --rm sls-go make _package
 .PHONY: package
 
@@ -18,8 +19,8 @@ deploy:
 .PHONY: deploy
 
 remove:
-	docker-compose run --rm serverless make _remove
-.PHONY: deploy
+	docker-compose run --rm sls-go make _remove
+.PHONY: remove
 
 shell:
 	docker-compose run --rm sls-go bash
@@ -30,17 +31,13 @@ clean:
 	docker-compose run --rm sls-go make _clean
 .PHONY: clean
 
-shell:
-	docker-compose run --rm sls-go bash
-.PHONY: clean
-
 deps:
 	docker-compose run --rm sls-go make _deps
 .PHONY: deps
 
 # target to run within container
 _clean:
-	@rm -rf $(HANDLER) $(HANDLER).so $(PACKAGE).zip
+	@rm -rf $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
 
 _deps:
 	@dep ensure -update

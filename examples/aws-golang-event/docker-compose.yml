@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   sls-go:
-    image: yunspace/serverless-golang:1.17.0
+    image: yunspace/serverless-golang:1.20.1
     env_file: .env
     volumes:
       - .:${WORKDIR}

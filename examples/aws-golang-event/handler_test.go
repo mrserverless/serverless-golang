@@ -6,16 +6,19 @@ import (
 	"net/http"
 	"github.com/eawsy/aws-lambda-go-event/service/lambda/runtime/event/apigatewayproxyevt"
 	"github.com/yunspace/serverless-golang/aws/event/apigateway"
-	"github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 	"fmt"
 	"encoding/json"
-	"github.com/yunspace/serverless-golang/examples/aws-golang-event/todo"
+	"github.com/yunspace/serverless-golang/examples/todo"
 )
 
 func TestCreate(t *testing.T) {
 	// given
-	todo := "{\"id\":\"00000000-0000-0000-0000-000000000000\",\"message\":\"hello world\"}"
-	evt := &apigatewayproxyevt.Event{Body: todo,}
+	givenTodo := `{
+		"id": "00000000-0000-0000-0000-000000000000",
+		"message":"hello world"
+	}`
+	evt := &apigatewayproxyevt.Event{Body: givenTodo}
 
 	// when
 	r, err := Create(evt, nil)
@@ -27,7 +30,7 @@ func TestCreate(t *testing.T) {
 	apiResponse, _ := r.(*apigateway.APIGatewayResponse)
 	assert.Equal(t, http.StatusCreated, apiResponse.StatusCode)
 	assert.Equal(t, "serverless-golang", apiResponse.Headers["X-Powered-By"])
-	assert.Equal(t, todo, apiResponse.Body)
+	assert.JSONEq(t, givenTodo, apiResponse.Body.(string))
 }
 
 func TestGet(t *testing.T) {
@@ -50,12 +53,16 @@ func TestGet(t *testing.T) {
 	apiResponse, _ := r.(*apigateway.APIGatewayResponse)
 	assert.Equal(t, http.StatusOK, apiResponse.StatusCode)
 	assert.Equal(t, "serverless-golang", apiResponse.Headers["X-Powered-By"])
-	assert.Equal(t, expected, apiResponse.Body)
+	assert.JSONEq(t, expected, apiResponse.Body.(string))
 }
 
 func TestList(t *testing.T) {
 	// given
 	evt := &apigatewayproxyevt.Event{}
+	todoService = todo.NewMockTodoService()
+	todoService.Create(&todo.Todo{ID: uuid.NewV4()})
+	todoService.Create(&todo.Todo{ID: uuid.NewV4()})
+	todoService.Create(&todo.Todo{ID: uuid.NewV4()})
 
 	// when
 	r, err := List(evt, nil)
@@ -69,7 +76,7 @@ func TestList(t *testing.T) {
 	assert.Equal(t, "serverless-golang", apiResponse.Headers["X-Powered-By"])
 
 	var todos []*todo.Todo
-	err = json.Unmarshal(apiResponse.Body.([]byte), todos)
+	err = json.Unmarshal([]byte(apiResponse.Body.(string)), &todos)
 	assert.NoError(t, err)
-	assert.Len(t, todos, 1)
+	assert.Len(t, todos, 3)
 }
