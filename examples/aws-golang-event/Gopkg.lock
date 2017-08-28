@@ -38,14 +38,14 @@
   revision = "890a5c3458b43e6104ff5da8dfa139d013d77544"
 
 [[projects]]
-  branch = "wip"
+  branch = "master"
   name = "github.com/yunspace/serverless-golang"
   packages = ["aws/event/apigateway","examples/todo"]
-  revision = "c08aae87c62c99d82eb8dc9c3f0ba16bea1831bb"
+  revision = "f9ddbc972ba146368260111a77f04e483bf83f08"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "853eef19381bb3049e5a8833e0b710c47f0a35fe37238767408a21faafca531e"
+  inputs-digest = "0d3940071482347ddc740a230a0fd124a6fac5c3ba1fdc69c9501eefda898393"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -19,5 +19,5 @@
   name = "github.com/stretchr/testify"
 
 [[constraint]]
-  branch = "wip"
+  branch = "master"
   name = "github.com/yunspace/serverless-golang"
