@@ -33,8 +33,10 @@ func (s *MockTodoService) Get(id uuid.UUID) (*Todo, error) {
 
 func (s *MockTodoService) List() ([]*Todo, error) {
 	ts := make([]*Todo, len(s.todoMap))
-	for _,t := range s.todoMap {
-		ts = append(ts, t)
+	i := 0
+	for _, t := range s.todoMap {
+		ts[i] = t
+		i++
 	}
 	return ts, nil
 }
