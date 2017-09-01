@@ -4,7 +4,7 @@ Serverless AWS Go Net example using:
 - [AWS Lambda Golang Net](https://github.com/eawsy/aws-lambda-go-net). 
 - [Gorilla MUX](http://www.gorillatoolkit.org/pkg/mux) 
 
-All CURD operations are within a single Lambda Function behind `gorilla/mux`. This example is
+All CRUD operations are within a single Lambda Function behind `gorilla/mux`. This example is
 very handy for porting over existing `golang/net` projects. However it is not readily compatible 
 with other Event Source triggers such as `Kinesis` or `SNS`.
 
