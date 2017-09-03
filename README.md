@@ -7,7 +7,7 @@
 src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png"
 align="right" width="100">](http://serverless.com)
 
-[serverless](https://serverless.com/) Golang example projects. 
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) Golang example projects. 
 
 ## Performance
 For AWS, we leverage eawsy's python based [AWS Lambda Go Shim](https://github.com/eawsy/aws-lambda-go-shim) for superior 
