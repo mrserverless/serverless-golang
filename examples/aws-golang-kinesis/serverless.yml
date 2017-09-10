@@ -1,0 +1,20 @@
+service: serverless-kinesis-streams
+
+package:
+  artifact: package.zip
+provider:
+  name: aws
+  runtime: python2.7
+  stage: ${env:ENV}
+  region: ${env:AWS_REGION}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Resource: "*"
+      Action:
+        - "kinesis:*"
+
+functions:
+  logger:
+    handler: handler.DataLogger
+    events:
+      - stream: ${env:AWS_KINESIS_ARN}

@@ -17,5 +17,6 @@ serverless install -u https://github.com/yunspace/serverless-golang/tree/master/
 cp .env.example .env
 # fill in and correct any of the variables in .env
 # replace `WORKDIR` in .env with `/go/src/path/your-app`
-make build deploy
+make test build deploy
+make remove
 ```

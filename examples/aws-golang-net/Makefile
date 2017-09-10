@@ -33,7 +33,7 @@ deps:
 
 # target to run within container
 _clean:
-	@rm -rf $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
+	@rm -rf .serverless $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
 
 _deps:
 	@dep ensure
