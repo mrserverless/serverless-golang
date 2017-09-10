@@ -1,6 +1,8 @@
 FROM eawsy/aws-lambda-go-shim:latest
 
 ENV SERVERLESS serverless@1.21.1
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:$PATH
 
 RUN true && \
     yum -q -e 0 -y update || true && \
