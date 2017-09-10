@@ -40,8 +40,8 @@ _deps:
 
 _build:
 	@go build -buildmode=plugin -ldflags='-w -s' -o $(HANDLER).so
-    @pack $(HANDLER) $(HANDLER).so $(PACKAGE).zip
-    @chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
+	@pack $(HANDLER) $(HANDLER).so $(PACKAGE).zip
+	@chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
 
 _test:
 	@go test
