@@ -10,10 +10,6 @@ test: deps
 	docker-compose run --rm sls-go make _test
 .PHONY: test
 
-package: test build
-	docker-compose run --rm sls-go make _package
-.PHONY: package
-
 deploy:
 	docker-compose run --rm sls-go make _deploy
 .PHONY: deploy
@@ -40,17 +36,15 @@ _clean:
 	@rm -rf $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
 
 _deps:
-	@dep ensure -update
+	@dep ensure
 
 _build:
 	@go build -buildmode=plugin -ldflags='-w -s' -o $(HANDLER).so
+    @pack $(HANDLER) $(HANDLER).so $(PACKAGE).zip
+    @chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
 
 _test:
 	@go test
-
-_package:
-	@pack $(HANDLER) $(HANDLER).so $(PACKAGE).zip
-	@chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
 
 _deploy:
 	rm -fr .serverless
