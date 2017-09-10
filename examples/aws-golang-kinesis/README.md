@@ -1,11 +1,8 @@
-# Serverless AWS Golang Event 
+# Serverless AWS Kinesis Stream
 Serverless AWS APIGateway events example using: 
 
 - [AWS Lambda Go Shim](https://github.com/eawsy/aws-lambda-go-shim)
 - [Kinesis Stream Event](https://github.com/eawsy/aws-lambda-go-event/tree/master/service/lambda/runtime/event/kinesisstreamsevt)
-
-
-Event Source triggers such as `Kinesis` or `SNS`.
 
 ## Usage
 Setup and deploy a new project called `your-app`:
