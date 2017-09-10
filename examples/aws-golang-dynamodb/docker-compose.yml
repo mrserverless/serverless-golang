@@ -1,0 +1,28 @@
+version: '2.1'
+services:
+  sls-go:
+    image: yunspace/serverless-golang:1.20.1
+    env_file: .env
+    volumes:
+      - .:${WORKDIR}
+      - ~/.aws:/root/.aws
+    working_dir: ${WORKDIR}
+  aws:
+    image: amaysim/aws:1.1.3
+    env_file: .env
+    volumes:
+      - .:/opt/app
+      - ~/.aws:/root/.aws
+    environment:
+      - AWS_DEFAULT_REGION=${AWS_REGION}
+    depends_on:
+      localstack:
+        condition: service_started
+  localstack:
+    image: localstack/localstack:0.7.5
+    environment:
+      - SERVICES=dynamodb:4569
+      - DEFAULT_REGION=${AWS_REGION}
+    ports:
+      - 4569:4569
+      - 8080:8080
