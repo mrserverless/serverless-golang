@@ -10,7 +10,7 @@ Setup and deploy a new project called `your-app`:
 ```bash
 # 1. install
 cd $GOPATH/src/path/
-serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-event -n your-app
+serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-kinesis -n your-app
 
 # 2. configure
 cp .env.example .env
