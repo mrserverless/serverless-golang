@@ -1,7 +1,7 @@
 # Serverless Golang
 
 ![alt text](./gopher.jpg "Serverless Golang Gopher")
-> Gopher inspired by Ashley McNamara (@ashleymcnamara) and Renee French artworks.
+> Gopher by [@flemay](https://github.com/flemay), inspired by [@ashleymcnamara](https://github.com/ashleymcnamara) and [Renee French](http://reneefrench.blogspot.com.au/) artworks.
 
 [<img
 src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png"
