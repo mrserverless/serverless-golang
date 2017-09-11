@@ -18,7 +18,7 @@ performance compared to Node.js shims:
 ## Features
 - works with AWS Lambda event sources or API Gateway HTTP requests.
 - go vendor support with default [dep](https://github.com/golang/dep). Can be swapped out easily.
-- use `docker` and `docker-compose` for easy testing and ensure consistent dependencies across `golang`, `python` and `serverless`
+- use `docker` and `docker-compose` for easy testing with [localstack](https://github.com/localstack/localstack) (example coming soon) and ensure consistent dependencies across `golang`, `python` and `serverless`
 
 ## Usage
 Prerequisites:
@@ -32,5 +32,11 @@ See each individual example for detailed instructions:
 - [Serverless Golang Kinesis](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-kinesis/)
 
 ## Clients
-Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build
-strategic Microservices. Serving 1M+ customers with up to 500CCU.
+Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build strategic Microservices across 4 business verticals.
+
+## RoadMap
+- ~~kinesis example~~
+- dynamodb example with localstack tests #13
+- event-gateway and FDK support #17
+- sls plugins example #21
+- Azure support #15
