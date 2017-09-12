@@ -46,7 +46,7 @@ deps:
 
 localstack:
 	docker-compose up -d localstack
-	docker-compose run --rm aws bash -c "aws dynamodb create-table --cli-input-json file://testdata/dynamodb_todos_table.json --endpoint-url http://localstack:4569"
+#	docker-compose run --rm aws bash -c "aws dynamodb create-table --cli-input-json file://testdata/dynamodb_todos_table.json --endpoint-url http://localstack:4569"
 
 shutDown:
 	docker-compose down --remove-orphans

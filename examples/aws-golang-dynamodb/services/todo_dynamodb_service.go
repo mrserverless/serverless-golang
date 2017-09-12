@@ -8,8 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"log"
 	"github.com/yunspace/serverless-golang/examples/aws-golang-dynamodb/config"
-	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
-	"github.com/amaysim-au/network-provisioner/services/db"
 )
 
 var _ api.CRUDAPI = (*TodoDynamoDBService)(nil)
@@ -19,7 +17,7 @@ const (
 )
 
 type TodoDynamoDBService struct {
-	db    dynamodbiface.DynamoDBAPI
+	db    *dynamo.DB
 	table *dynamo.Table
 }
 
@@ -44,19 +42,15 @@ func NewTodoDynamoDBService(dbConf *config.DynamoDBConfig) *TodoDynamoDBService 
 }
 
 func (s *TodoDynamoDBService) Create(v api.Entity) error {
-
-	return nil
+	t := v.(*todo.Todo)
+	return s.table.Put(t).Run()
 }
 
 func (s *TodoDynamoDBService) Get(id [16]byte) (api.Entity, error) {
 	todo := &todo.Todo{}
-	s.db.GetItem(
-
-	)
-
 	if err := s.table.Get(partitionKey, id).One(todo); err != nil {
 		if err == dynamo.ErrNotFound {
-			return nil, err
+			return nil, nil
 		}
 		return nil, err
 	}
