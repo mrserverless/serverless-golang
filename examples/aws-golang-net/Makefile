@@ -47,7 +47,6 @@ _test:
 	@go test
 
 _deploy:
-	rm -fr .serverless
 	sls deploy -v
 
 _remove:
