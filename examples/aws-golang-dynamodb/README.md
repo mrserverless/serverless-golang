@@ -16,9 +16,11 @@ serverless install -u https://github.com/yunspace/serverless-golang/tree/master/
 cp .env.example .env
 # fill in and correct any of the variables in .env
 # replace `WORKDIR` in .env with `/go/src/path/your-app`
-make package deploy
+make test
+make build deploy
 ```
 
 ## Testing
-With docker compose you are free to use `localstack/localstack` containers or similar tooling to simulate
-AWS behaviour. Example might be added in the future.
+This project uses `localstack` via docker to test the DynamoDB calls locally. 
+Everything is automatically taken care of by `make test`
+

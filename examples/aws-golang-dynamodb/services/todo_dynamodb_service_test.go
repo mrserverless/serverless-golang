@@ -10,7 +10,7 @@ import (
 	"github.com/yunspace/serverless-golang/examples/todo"
 )
 
-const TableName = "Todos"
+const TableName = "todos"
 
 func givenConfig() *config.DynamoDBConfig {
 
@@ -19,7 +19,7 @@ func givenConfig() *config.DynamoDBConfig {
 			AWSRegion: "ap-southeast-2",
 		},
 		EndPoint: "http://localhost:4569",
-		Table: "todos",
+		Table: TableName,
 	}
 
 }
@@ -30,13 +30,13 @@ func createTable(service *TodoDynamoDBService) error {
 		TableName: aws.String(TableName),
 		AttributeDefinitions: []*dynamodb.AttributeDefinition{
 			{
-				AttributeName: aws.String("Id"),
+				AttributeName: aws.String("id"),
 				AttributeType: aws.String("N"),
 			},
 		},
 		KeySchema: []*dynamodb.KeySchemaElement{
 			{
-				AttributeName: aws.String("Id"),
+				AttributeName: aws.String("id"),
 				KeyType: aws.String("HASH"),
 			},
 		},
@@ -61,7 +61,7 @@ func TestNewTodoDynamoDBService_canCreateAndListTable(t *testing.T) {
 	service := NewTodoDynamoDBService(dbConf)
 
 	// when
-	dropTable(service)
+	defer dropTable(service)
 	assert.NoError(t, createTable(service))
 
 	// then
@@ -78,7 +78,7 @@ func TestCreateAndGetTodo(t *testing.T) {
 	}
 	dbConf := givenConfig()
 	service := NewTodoDynamoDBService(dbConf)
-	dropTable(service)
+	defer dropTable(service)
 	assert.NoError(t, createTable(service))
 
 	// when

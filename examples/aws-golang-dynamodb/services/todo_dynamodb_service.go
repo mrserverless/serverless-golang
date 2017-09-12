@@ -17,8 +17,8 @@ const (
 )
 
 type TodoDynamoDBService struct {
-	db    *dynamo.DB
-	table *dynamo.Table
+	db        *dynamo.DB
+	table     *dynamo.Table
 }
 
 func NewDynamoDB(dbConf *config.DynamoDBConfig) *dynamo.DB {
