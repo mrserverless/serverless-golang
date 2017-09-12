@@ -12,11 +12,11 @@ with other Event Source triggers such as `Kinesis` or `SNS`.
 Setup and deploy a new project called `your-app`:
 
 ```bash
-cd $GOPATH/src/your-app   
+cd $GOPATH/src/your-path   
 serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-net -n your-app
 cp .env.example .env
 # fill in and correct any of the variables in .env
-# replace `WORKDIR` in .env with `/go/src/path/your-app`
+# replace `WORKDIR` in .env with `/go/src/your-path/your-app`
 make test build deploy
 make remove
 ```
