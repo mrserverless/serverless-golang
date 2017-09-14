@@ -1,0 +1,7 @@
+[[constraint]]
+  branch = "master"
+  name = "github.com/eawsy/aws-lambda-go-net"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/neelance/graphql-go"
