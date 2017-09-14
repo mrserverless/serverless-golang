@@ -36,12 +36,14 @@ See each individual example for detailed instructions:
 - [Serverless Golang Event](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-event/)
 - [Serverless Golang Net](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-net/)
 - [Serverless Golang Kinesis](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-kinesis/)
+- [Serverless Golang Graphql](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-graphql/)
 
 ## Clients
 Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build strategic Microservices across 4 business verticals.
 
 ## RoadMap
 - ~~kinesis example~~
+- ~~graphql example~~
 - dynamodb example with localstack tests #13
 - event-gateway and FDK support #17
 - sls plugins example #21
