@@ -33,6 +33,14 @@ shell: $(DOTENV_TARGET)
 	docker-compose run --rm sls-go bash
 .PHONY: shell
 
+publish: $(DOTENV_TARGET)
+	docker-compose run --rm sls-go make _publish
+.PHONY: pubsub
+
+logger: $(DOTENV_TARGET)
+	docker-compose run --rm sls-go make _logger
+.PHONY: logger
+
 ########################################
 # others - run within or out of docker #
 ########################################
@@ -44,7 +52,12 @@ dotenv:
 	@echo "Switching .env to $(DOTENV)"
 	cp $(DOTENV) .env
 
-# target to run within container
+_publish:
+	sls invoke --function publisher --path event.json
+
+_logger:
+	sls logs --function logger
+
 _clean:
 	@rm -rf .serverless $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
 
@@ -57,10 +70,10 @@ _build:
 	@chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
 
 _test:
-	@go test
+	@go test $(shell go list ./... | grep -v /vendor/)
 
 _deploy:
-	sls deploy -v
+	@sls deploy -v
 
 _remove:
-	sls remove -v
+	@sls remove -v

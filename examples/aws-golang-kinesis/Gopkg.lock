@@ -3,13 +3,67 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/aws/aws-sdk-go"
+  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/shareddefaults","private/protocol","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","service/kinesis","service/kinesis/kinesisiface","service/sts"]
+  revision = "8d2831dd9188c8f7a1c9719564d23f879bba0179"
+
+[[projects]]
+  name = "github.com/davecgh/go-spew"
+  packages = ["spew"]
+  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/eawsy/aws-lambda-go-core"
+  packages = ["service/lambda/runtime"]
+  revision = "e26eed6aa244a3d45aa693816a9c5faf39390fcd"
+
+[[projects]]
+  branch = "master"
   name = "github.com/eawsy/aws-lambda-go-event"
   packages = ["service/lambda/runtime/event/kinesisstreamsevt"]
   revision = "a318481f661f091bafea408f9967cb1ac5bf8905"
 
+[[projects]]
+  name = "github.com/go-ini/ini"
+  packages = ["."]
+  revision = "20b96f641a5ea98f2f8619ff4f3e061cff4833bd"
+  version = "v1.28.2"
+
+[[projects]]
+  name = "github.com/jmespath/go-jmespath"
+  packages = ["."]
+  revision = "3433f3ea46d9f8019119e7dd41274e112a2359a9"
+  version = "0.2.2"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/kelseyhightower/envconfig"
+  packages = ["."]
+  revision = "bc1350181c239ebcef7a398f576160021f5dfed6"
+
+[[projects]]
+  name = "github.com/pmezard/go-difflib"
+  packages = ["difflib"]
+  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  revision = "5bf94b69c6b68ee1b541973bb8e1144db23a194b"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/stretchr/testify"
+  packages = ["assert"]
+  revision = "890a5c3458b43e6104ff5da8dfa139d013d77544"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7cf32a010096b696cc3c17c5d8845e177b35632055ed70eec806dac168584191"
+  inputs-digest = "be2bf52f7d923065a1e2ee35ce3371f10ce52f0f0abc76210a2cd46d87e63e9a"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -4,7 +4,9 @@ Serverless AWS APIGateway events example using:
 - [AWS Lambda Go Shim](https://github.com/eawsy/aws-lambda-go-shim)
 - [Kinesis Stream Event](https://github.com/eawsy/aws-lambda-go-event/tree/master/service/lambda/runtime/event/kinesisstreamsevt)
 
-## Usage
+Inspired by https://github.com/pmuens/serverless-kinesis-streams
+
+## Installation
 Setup and deploy a new project called `your-app`:
 
 ```bash
@@ -25,8 +27,18 @@ make DOTENV=.env.example dotenv
 make test build deploy
 ```
 
-The lambda will trigger on all new messages published to the `data-receiver` stream
+## Usage
+Publish a message
+```bash
+make publish
+```
 
+Observe the logs to see `data-receiver` stream triggering `data-logger`
+```bash
+make logger
+```
+
+## Cleanup
 ```bash
 make remove
 ```

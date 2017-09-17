@@ -21,3 +21,15 @@
 [[constraint]]
   branch = "master"
   name = "github.com/yunspace/serverless-golang"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/satori/go.uuid"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/aws/aws-sdk-go"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/kelseyhightower/envconfig"
