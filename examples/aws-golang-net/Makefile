@@ -13,7 +13,7 @@ deps:
 	docker-compose run --rm sls-go make _deps
 .PHONY: deps
 
-build: $(DOTENV_TARGET) clean deps
+build: $(DOTENV_TARGET) _clean deps
 	docker-compose run --rm sls-go make _build
 .PHONY: build
 
