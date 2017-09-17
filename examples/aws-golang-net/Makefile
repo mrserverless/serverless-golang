@@ -1,35 +1,48 @@
 HANDLER=handler
 PACKAGE=package
+ifdef DOTENV
+	DOTENV_TARGET=dotenv
+else
+	DOTENV_TARGET=.env
+endif
 
-# entrypoints
-build: clean deps
-	docker-compose run --rm sls-go make _build
-.PHONY: build
-
-test: deps
-	docker-compose run --rm sls-go make _test
-.PHONY: test
-
-deploy:
-	docker-compose run --rm sls-go make _deploy
-.PHONY: deploy
-
-remove:
-	docker-compose run --rm sls-go make _remove
-.PHONY: remove
-
-shell:
-	docker-compose run --rm sls-go bash
-.PHONY: shell
-
-# helpers
-clean:
-	docker-compose run --rm sls-go make _clean
-.PHONY: clean
-
+########################################
+# entrypoints - run within docker only #
+########################################
 deps:
 	docker-compose run --rm sls-go make _deps
 .PHONY: deps
+
+build: $(DOTENV_TARGET) clean deps
+	docker-compose run --rm sls-go make _build
+.PHONY: build
+
+test: $(DOTENV_TARGET) deps
+	docker-compose run --rm sls-go make _test
+.PHONY: test
+
+deploy: $(DOTENV_TARGET)
+	docker-compose run --rm sls-go make _deploy
+.PHONY: deploy
+
+remove: $(DOTENV_TARGET)
+	docker-compose run --rm sls-go make _remove
+.PHONY: remove
+
+shell: $(DOTENV_TARGET)
+	docker-compose run --rm sls-go bash
+.PHONY: shell
+
+########################################
+# others - run within or out of docker #
+########################################
+.env:
+	@echo "Create .env with .env.template"
+	cp .env.template .env
+
+dotenv:
+	@echo "Switching .env to $(DOTENV)"
+	cp $(DOTENV) .env
 
 # target to run within container
 _clean:

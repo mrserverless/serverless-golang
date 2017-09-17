@@ -9,14 +9,12 @@ Setup and deploy a new project called `your-app`:
 
 ```bash
 cd $GOPATH/src/your-path
-```
-
-```bash  
 serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-graphql -n your-app
 ```
 
 ```bash  
-cp .env.example .env
+cd your-app
+make DOTENV=.env.example dotenv
 ```
 * fill in and correct any of the variables in .env
 * replace `WORKDIR` in .env with `/go/src/your-path/your-app`

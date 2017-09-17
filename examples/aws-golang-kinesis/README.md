@@ -8,21 +8,25 @@ Serverless AWS APIGateway events example using:
 Setup and deploy a new project called `your-app`:
 
 ```bash
-# 1. install
 cd $GOPATH/src/your-path/
 serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-kinesis -n your-app
+```
 
-# 2. configure
-cp .env.example .env
+```bash
+cd your-app
+make DOTENV=.env.example dotenv
+```
 
-# 3. create a new stream called `data-receiver` in AWS console
-# 4. fill in and correct any of the variables in .env. Especially AWS_KINESIS_ARN
-# 5. replace `WORKDIR` in .env with `/go/src/your-path/your-app`
-# 6. deploy
+* create a new stream called `data-receiver` in AWS console
+* fill in and correct any of the variables in .env. Especially AWS_KINESIS_ARN
+* replace `WORKDIR` in .env with `/go/src/your-path/your-app`
+
+```bash
 make test build deploy
-
-# 7. clean up
-make remove
 ```
 
 The lambda will trigger on all new messages published to the `data-receiver` stream
+
+```bash
+make remove
+```
