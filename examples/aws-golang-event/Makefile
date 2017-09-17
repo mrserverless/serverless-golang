@@ -57,10 +57,10 @@ _build:
 	@chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
 
 _test:
-	@go test
+	@go test $(shell go list ./... | grep -v /vendor/)
 
 _deploy:
-	sls deploy -v
+	@sls deploy -v
 
 _remove:
-	sls remove -v
+	@sls remove -v
