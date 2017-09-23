@@ -37,6 +37,7 @@ See each individual example for detailed instructions:
 - [Serverless Golang Net](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-net/)
 - [Serverless Golang Kinesis](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-kinesis/)
 - [Serverless Golang Graphql](https://github.com/yunspace/serverless-golang/blob/master/examples/aws-golang-graphql/)
+- [Building Slack Slash Commands Tutorial](https://medium.com/@kmarquardsen/serverless-slack-commands-with-go-the-serverless-framework-fa9f3480437c)
 
 ## Clients
 Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build strategic Microservices across 4 business verticals.
