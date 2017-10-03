@@ -13,7 +13,7 @@ Setup and deploy a new project called `your-app`:
 
 ```bash
 cd $GOPATH/src/your-path/
-serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-event -n your-app
+serverless install -u https://github.com/yunspace/serverless-golang/tree/master/examples/aws-golang-net -n your-app
 ```
 
 ```bash
