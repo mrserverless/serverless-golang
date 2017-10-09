@@ -51,3 +51,4 @@ Currently used by [amaysim Australia](https://www.amaysim.com.au/) to build stra
 - event-gateway and FDK support #17
 - sls plugins example #21
 - Azure support #15
+- OpenWhisk
