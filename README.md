@@ -1,13 +1,13 @@
 # Serverless Golang
 
-![alt text](./gopher.jpg "Serverless Golang Gopher")
+![Serverless Gopher](./gopher.jpg)
 > Gopher by [@flemay](https://github.com/flemay), inspired by [@ashleymcnamara](https://github.com/ashleymcnamara) and [Renee French](http://reneefrench.blogspot.com.au/) artworks.
 
 [<img
 src="https://rawgit.com/justserverless/awesome-serverless/master/logo_serverless.png"
 align="right" width="100">](http://serverless.com)
 
-[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) Go example projects. 
+[![Serverless Badge](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com) Go example projects. 
 
 Go Meetup Presentation: https://www.slideshare.net/yunspace/amazingly-simple-serverless-go
 
@@ -26,7 +26,7 @@ performance compared to Node.js shims:
   - vendor support via [glide](https://github.com/Masterminds/glide), [trash](https://github.com/rancher/trash) and [dep](https://github.com/golang/dep)
   - python 2.7
   - node 6
-  - serverless 1.22.0
+  - serverless 1.24.0
 
 ## Usage
 Prerequisites:
