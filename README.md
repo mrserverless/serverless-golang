@@ -22,11 +22,11 @@ performance compared to Node.js shims:
 - use `docker` and `docker-compose` for easy testing with [localstack](https://github.com/localstack/localstack) (example coming soon) and ensure consistent dependencies across `golang`, `python` and `serverless`
 - docker builder image immutably baked in with: 
   - amazon linux base image for building AWS Lambda
-  - go 1.9
+  - go 1.9.2
   - vendor support via [glide](https://github.com/Masterminds/glide), [trash](https://github.com/rancher/trash) and [dep](https://github.com/golang/dep)
   - python 2.7
   - node 6
-  - serverless 1.24.0
+  - serverless 1.25.0
 
 ## Usage
 Prerequisites:
