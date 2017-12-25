@@ -1,6 +1,6 @@
 FROM eawsy/aws-lambda-go-shim:latest
 
-ENV SERVERLESS serverless@1.24.0
+ENV SERVERLESS serverless@1.25.0
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/root/.yarn/bin:$PATH
 
