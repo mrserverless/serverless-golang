@@ -1,0 +1,23 @@
+[[constraint]]
+  branch = "master"
+  name = "github.com/stretchr/testify"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/golang/mock"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/satori/go.uuid"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/aws/aws-sdk-go"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/aws/aws-lambda-go"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/kelseyhightower/envconfig"
