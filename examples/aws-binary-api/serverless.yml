@@ -1,28 +1,32 @@
-service: serverless-kinesis-streams
+service: aws-binary
 
-package:
-  artifact: package.zip
+plugins:
+  - serverless-apigw-binary
+custom:
+  apigwBinary:
+    types:
+      - 'application/x-protobuf'
+
 provider:
   name: aws
   runtime: go1.x
-  stage: ${env:ENV}
-  region: ${env:AWS_REGION}
-  iamRoleStatements:
-      - Effect: "Allow"
-        Resource: ${env:AWS_KINESIS_ARN}
-        Action:
-          - "kinesis:GetRecords"
-          - "kinesis:GetShardIterator"
-          - "kinesis:DescribeStream"
-          - "kinesis:ListStreams"
-          - "kinesis:PutRecord"
-          - "kinesis:PutRecords"
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
 functions:
-  publisher:
-    handler: handler.DataPublisher
-    environment:
-      AWS_KINESIS_NAME: ${env:AWS_KINESIS_NAME}
-  logger:
-    handler: handler.DataLogger
+  proto:
+    handler: proto/proto.handler
     events:
-      - stream: ${env:AWS_KINESIS_ARN}
+      - http:
+          path: /proto/main
+          method: get
+  # json:
+  #   handler: json/json.handler
+  #   events:
+  #     - http:
+  #         path: /json/main
+  #         method: get

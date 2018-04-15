@@ -1,0 +1,12 @@
+package protodemo;
+syntax = "proto3";
+
+message Player {
+  string id = 1;
+  string name = 2;
+  repeated int32 scores = 3;
+}
+
+message Players {
+  repeated Player players = 1;
+}
