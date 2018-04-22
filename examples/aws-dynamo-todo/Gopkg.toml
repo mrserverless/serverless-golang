@@ -1,0 +1,17 @@
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/stretchr/testify"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/yunspace/serverless-golang"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/guregu/dynamo"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/satori/go.uuid"
+
