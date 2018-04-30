@@ -2,12 +2,9 @@ package services
 
 import (
 	"github.com/guregu/dynamo"
-	"github.com/yunspace/serverless-golang/api"
-	"github.com/yunspace/serverless-golang/examples/todo"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/aws"
 	"log"
-	"github.com/yunspace/serverless-golang/examples/aws-golang-dynamodb/config"
 )
 
 var _ api.CRUDAPI = (*TodoDynamoDBService)(nil)

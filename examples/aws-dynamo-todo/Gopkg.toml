@@ -1,11 +1,14 @@
+[[constraint]]
+  name = "github.com/aws/aws-lambda-go"
+  version = "1.1.0"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/stretchr/testify"
+  version = "1.2.1"
 
-[[constraint]]
-  branch = "master"
-  name = "github.com/yunspace/serverless-golang"
+# [[constraint]]
+#   branch = "master"
+#   name = "github.com/yunspace/serverless-golang"
 
 [[constraint]]
   branch = "master"
@@ -14,4 +17,9 @@
 [[constraint]]
   branch = "master"
   name = "github.com/satori/go.uuid"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/nzoschke/gofaas"
+
 

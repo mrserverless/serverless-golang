@@ -1,9 +1,9 @@
 HANDLER=handler
 PACKAGE=package
 
-################
-# Entry Points #
-################
+####################
+# SLS Entry Points #
+####################
 build: .env deps
 	docker-compose run --rm go make _build
 .PHONY: build
@@ -22,7 +22,7 @@ remove: .env
 .PHONY: remove
 
 shellGo: .env
-	docker-compose run --rm go bash
+	docker-compose run --rm go /bin/sh
 .PHONY: shellGo
 
 shellAws:
@@ -53,17 +53,16 @@ shutDown:
 
 # target to run within container
 _clean:
-	@rm -rf $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
+	rm -rf $(HANDLER).zip $(HANDLER).so $(PACKAGE).zip
 
 _deps:
-	@dep ensure
+	dep ensure
 
 _build:
-	@go build -ldflags='-w -s' -o bin/todo
-	@chown $(shell stat -c '%u:%g' .) $(HANDLER).so $(PACKAGE).zip
+	GOOS=linux go build -ldflags='-w -s' -o bin/create
 
 _test:
-	@go test services
+	go test services
 
 _deploy:
 	rm -fr .serverless

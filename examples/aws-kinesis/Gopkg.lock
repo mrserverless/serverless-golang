@@ -96,6 +96,15 @@
   revision = "c679ae2cc0cb27ec3293fea7e254e47386f05d69"
 
 [[projects]]
+  branch = "aws-go"
+  name = "github.com/yunspace/serverless-golang"
+  packages = [
+    "examples/aws-kinesis/config",
+    "examples/aws-kinesis/services"
+  ]
+  revision = "48b98290a28e3c3950463c6efbc7da34f48b714f"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context"]
@@ -104,6 +113,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d781d46cb6df1d0e32fec284b85d99103c502685a348029963624ace45c4759d"
+  inputs-digest = "839bb07ea1e3ec2a4b106ae2c55fb1c2da4e6afdbff80eabb9039e13d5b0fd5b"
   solver-name = "gps-cdcl"
   solver-version = 1

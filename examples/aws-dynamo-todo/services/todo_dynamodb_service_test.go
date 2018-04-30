@@ -1,12 +1,13 @@
 package services
 
 import (
-	"github.com/yunspace/serverless-golang/examples/aws-golang-dynamodb/config"
 	"testing"
-	"github.com/stretchr/testify/assert"
-	"github.com/aws/aws-sdk-go/service/dynamodb"
+
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/satori/go.uuid"
+	"github.com/stretchr/testify/assert"
+	"github.com/yunspace/serverless-golang/examples/aws-dynamo-todo/config"
 	"github.com/yunspace/serverless-golang/examples/todo"
 )
 
@@ -19,7 +20,7 @@ func givenConfig() *config.DynamoDBConfig {
 			AWSRegion: "ap-southeast-2",
 		},
 		EndPoint: "http://localhost:4569",
-		Table: TableName,
+		Table:    TableName,
 	}
 
 }
@@ -37,11 +38,11 @@ func createTable(service *TodoDynamoDBService) error {
 		KeySchema: []*dynamodb.KeySchemaElement{
 			{
 				AttributeName: aws.String("id"),
-				KeyType: aws.String("HASH"),
+				KeyType:       aws.String("HASH"),
 			},
 		},
 		ProvisionedThroughput: &dynamodb.ProvisionedThroughput{
-			ReadCapacityUnits: aws.Int64(10),
+			ReadCapacityUnits:  aws.Int64(10),
 			WriteCapacityUnits: aws.Int64(5),
 		},
 	})

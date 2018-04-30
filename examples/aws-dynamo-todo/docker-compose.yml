@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   go:
-    image: amaysim/golang:1.10.0-stretch
+    image: lambci/lambda:build-go1.x
     env_file: .env
     volumes:
       - .:${WORKDIR}
