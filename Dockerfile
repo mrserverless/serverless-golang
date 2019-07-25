@@ -4,7 +4,8 @@ ENV SERVERLESS serverless@1.48.3
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/root/.yarn/bin:$PATH
 
-RUN mkdir /.cache && mkdir /.cache/go-build
+RUN mkdir /.cache && \
+    mkdir /.cache/go-build
 RUN apt-get update && \
     apt-get install git
 RUN	go get -u github.com/rancher/trash
