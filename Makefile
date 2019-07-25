@@ -1,5 +1,5 @@
 SLS_VERSION = 1.48.3
-IMAGE_NAME ?= muellermh/serverless-golang:$(SLS_VERSION)
+IMAGE_NAME ?= yunspace/serverless-golang:$(SLS_VERSION)
 
 dockerPull:
 	docker pull $(IMAGE_NAME)
