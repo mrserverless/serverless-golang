@@ -1,4 +1,4 @@
-SLS_VERSION = 1.25.0
+SLS_VERSION = 1.48.3
 IMAGE_NAME ?= yunspace/serverless-golang:$(SLS_VERSION)
 
 dockerPull:
